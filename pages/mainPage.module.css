@@ -1,0 +1,9 @@
+.container {
+    min-height: 100vh;
+    /* max-height: 100vh; */
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    /* align-items: top; */
+    overflow-x: hidden;
+  }

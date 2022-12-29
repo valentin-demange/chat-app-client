@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": [
+        "components/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ]
+    }
+  },
+  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "pages/Test.jss", "components/Login/currentUser.jsx", "components/Login/currentUser.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.js", "components/firebaseLogin.old", "pages/test.jsx", "components/Chat Window/chatHeader.jsx", "components/Side Bar/sideBarChats.jsx", "components/Chat Window/chatBody.jsx", "components/Login/firebaseAuth.jsx", "compon, "components/Side Bar/sideBarChatItem.jsx"ents/Others/textUser.jsx", "components/Others/avatarUser.jsx", "components/Side Bar/privateChatDrawer.jsx"],
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "utils/testFormatting.js", "pages/api/generate.js", "pages/api/deleteCollection.js", "test/firebase.js", "utils/firebase.js"  ]
+}
