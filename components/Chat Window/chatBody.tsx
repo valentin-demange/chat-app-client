@@ -1,14 +1,7 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { db } from "utils/firebase";
-import {
-  collection,
-  query,
-  orderBy,
-} from "firebase/firestore";
 import { CurrentChatContext, CurrentUserContext } from "utils/context";
-import { useCollection } from "react-firebase-hooks/firestore";
 
 export default function ChatBody() {
   const chatMessagesPath = [
@@ -18,29 +11,35 @@ export default function ChatBody() {
   ].join("/");
   const currentUser = useContext(CurrentUserContext);
 
-  const recentMessagesQuery = query(
-    collection(db, chatMessagesPath),
+  // const recentMessagesQuery = query(
+  //   collection(db, chatMessagesPath),
       
-  );
+  // );
 
-  const [value, loading, error] = useCollection(recentMessagesQuery, {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  // const [value, loading, error] = useCollection(recentMessagesQuery, {
+  //   snapshotListenOptions: { includeMetadataChanges: true },
+  // });
+
+  const value = true;
+  const messagesList = [
+    <MessageOther key="2" profilePicUrl="" text="Hello world"></MessageOther>,
+    <MessageMe key="1" text="Hello world"></MessageMe>,
+  ];
 
   if (value) {
     // debugger
     // const listItems = value.docs.map((doc) => <p>{`Id: ${doc.id} \n Msg: ${doc.data().text}`}</p>)
-    const messagesList = value.docs.map((doc) =>
-      currentUser.uid === doc.data().authorId ? (
-        <MessageMe key={doc.id} text={doc.data().text}></MessageMe>
-      ) : (
-        <MessageOther
-          key={doc.id}
-          profilePicUrl={doc.data().profilePicUrl}
-          text={doc.data().text}
-        ></MessageOther>
-      )
-    );
+    // const messagesList = value.docs.map((doc) =>
+    //   currentUser.uid === doc.data().authorId ? (
+    //     <MessageMe key={doc.id} text={doc.data().text}></MessageMe>
+    //   ) : (
+    //     <MessageOther
+    //       key={doc.id}
+    //       profilePicUrl={doc.data().profilePicUrl}
+    //       text={doc.data().text}
+    //     ></MessageOther>
+    //   )
+    // );
 
     return (
       <Box className={styles.chatBody}>
@@ -48,8 +47,8 @@ export default function ChatBody() {
       </Box>
     );
   }
-  if (loading) return <div></div>;
-  if (error) return <div>Error</div>;
+  // if (loading) return <div></div>;
+  // if (error) return <div>Error</div>;
   return <></>;
 
 }
