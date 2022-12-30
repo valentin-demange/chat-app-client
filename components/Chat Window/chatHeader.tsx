@@ -27,8 +27,8 @@ export default function ChatHeader() {
 
   const chatInfo = {
     private: false,
-    membersUid: ["general"],
-    name: "general",
+    membersUid: ["General"],
+    name: "General",
     avatarPic: "",
     lastMessage: 0,
   }
@@ -38,7 +38,7 @@ export default function ChatHeader() {
   
     const memberUid = chatInfo.private
       ? chatInfo.membersUid.filter((uid : string) => currentUser.uid !== uid)[0]
-      : "general";
+      : "General";
 
       const handleOnClick = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();

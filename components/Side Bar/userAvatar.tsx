@@ -1,6 +1,3 @@
-import { signOut } from "firebase/auth";
-import "firebase/compat/auth";
-import {auth} from "../../utils/firebase";
 
 import {
   IconButton,
@@ -16,7 +13,7 @@ import { CurrentUserContext } from 'utils/context';
 
 
 const logout = () => {
-  signOut(auth);
+  // signOut(auth);
   window.location.href = "/";
 };
 

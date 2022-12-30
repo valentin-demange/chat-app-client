@@ -1,6 +1,5 @@
-import {message} from "./firebase"
 
-export default async function askGilbert(chatGilbert: message[], userName: string) {
+export default async function askGilbert(chatGilbert: any, userName: string) {
   const response = await fetch("/api/askOpenAi", {
     method: "POST",
     headers: {
@@ -13,7 +12,7 @@ export default async function askGilbert(chatGilbert: message[], userName: strin
   return data.result;
 }
 
-const formatGilbertPrompt = (chatGilbert: message[], userName:string) => {
+const formatGilbertPrompt = (chatGilbert: any, userName:string) => {
   const intro = `The following is a conversation between ${userName} and Gilbert. 
   Gilbert is helpful, creative, clever, and very friendly. 
   Gilbert try to convince people to hire Valentin as a front-end developer for a tech company. 

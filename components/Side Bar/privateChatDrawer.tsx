@@ -10,21 +10,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { collection } from "firebase/firestore";
-import {
-  useCollectionData,
-} from "react-firebase-hooks/firestore";
-import { db } from "utils/firebase";
 import { CurrentUserContext } from "utils/context";
 import PrivateChatDrawerItem from "./privateChatDrawerItem";
 
 export default function PrivateChatDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const currentUser = useContext(CurrentUserContext);
-  const [value, loading, error] = useCollectionData(collection(db, "users"), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  // const [value, loading, error] = useCollectionData(collection(db, "users"), {
+  //   snapshotListenOptions: { includeMetadataChanges: true },
+  // });
 
+
+  const value = true;
 
   if (value) {
     // const listItems = value
@@ -75,7 +72,7 @@ export default function PrivateChatDrawer() {
       </>
     );
   }
-  if (loading) return <div></div>;
-  if (error) return <div>Error</div>;
+  // if (loading) return <div></div>;
+  // if (error) return <div>Error</div>;
   return <></>
 }
