@@ -2,11 +2,9 @@ import styles from "./styles.module.css";
 import { Box, IconButton, Input } from "@chakra-ui/react";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
-import { writeMessage, checkGilbert } from "utils/firebase";
 import { useContext } from "react";
 import { CurrentUserContext, CurrentChatContext } from "utils/context";
 import askGilbert from "utils/askGilbert";
-import { User } from "firebase/auth";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
@@ -24,12 +22,12 @@ export default function ChatFooter() {
     if (textMessage === "") return;
     setTextMessage("");
 
-    writeMessage(currentChat, currentUser, textMessage)
-    const chatGilbert = await checkGilbert(currentChat);
-    if (chatGilbert) {
-      const answerGilbert = await askGilbert(chatGilbert, currentUser.displayName as string)
-      writeMessage(currentChat, {uid: "Gilbert", photoURL:"gilbert.png"} as User, answerGilbert)
-    }
+    // writeMessage(currentChat, currentUser, textMessage)
+    // const chatGilbert = await checkGilbert(currentChat);
+    // if (chatGilbert) {
+    //   const answerGilbert = await askGilbert(chatGilbert, currentUser.displayName as string)
+    //   writeMessage(currentChat, {uid: "Gilbert", photoURL:"gilbert.png"} as User, answerGilbert)
+    // }
   };
 
 
