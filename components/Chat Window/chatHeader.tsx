@@ -8,14 +8,10 @@ import {
   MenuList,
   MenuItem,
   Text,
-  Heading,
 } from "@chakra-ui/react";
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
 import { CurrentChatContext, CurrentUserContext, SetCurrentChatContext } from "utils/context";
-import { db } from "utils/firebase";
-import { deleteDoc, doc} from "firebase/firestore";
-import { useDocumentData } from "react-firebase-hooks/firestore";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 
@@ -24,25 +20,33 @@ export default function ChatHeader() {
   const currentChat = useContext(CurrentChatContext);
   const SetCurrentChat = useContext(SetCurrentChatContext);
 
-  const [chatInfo, loading, error] = useDocumentData(
-    doc(db, "chats", currentChat),
-    { snapshotListenOptions: { includeMetadataChanges: true } }
-  );
+  // const [chatInfo, loading, error] = useDocumentData(
+  //   doc(db, "chats", currentChat),
+  //   { snapshotListenOptions: { includeMetadataChanges: true } }
+  // );
+
+  const chatInfo = {
+    private: false,
+    membersUid: ["general"],
+    name: "general",
+    avatarPic: "",
+    lastMessage: 0,
+  }
 
   if (chatInfo) {
 
   
     const memberUid = chatInfo.private
       ? chatInfo.membersUid.filter((uid : string) => currentUser.uid !== uid)[0]
-      : null;
+      : "general";
 
       const handleOnClick = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         SetCurrentChat("public");
-        await deleteDoc(doc(db, ["users", currentUser.uid, "chats", chatInfo.chatId].join("/"))); 
-        await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
-        await deleteDoc(doc(db, "chats", chatInfo.chatId)); 
-        console.log("Chat ID ", chatInfo.chatId, "has been deleted");
+        // await deleteDoc(doc(db, ["users", currentUser.uid, "chats", chatInfo.chatId].join("/"))); 
+        // await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
+        // await deleteDoc(doc(db, "chats", chatInfo.chatId)); 
+        // console.log("Chat ID ", chatInfo.chatId, "has been deleted");
       };
         
       return (
@@ -69,7 +73,7 @@ export default function ChatHeader() {
           <Text fontSize={13} fontWeight="normal" color="gray.400">
             {chatInfo.lastMessage
               ? "Last message at " +
-                chatInfo.lastMessage.toDate().toLocaleTimeString()
+                chatInfo.lastMessage
               : "No last message"}
           </Text>
         </div>
@@ -90,7 +94,7 @@ export default function ChatHeader() {
       </Box>
     );
   }
-  if (loading) return <></>;
-  if (error) return <div>Error</div>;
+  // if (loading) return <></>;
+  // if (error) return <div>Error</div>;
   return <></>
 }
