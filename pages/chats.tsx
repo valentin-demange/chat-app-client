@@ -1,4 +1,4 @@
-import styles from "./mainPage.module.css";
+import styles from "./chats.module.css";
 import SideBar from "@/components/Side Bar/main";
 import ChatWindow from "@/components/Chat Window/main";
 import React, { useEffect, useState } from "react";

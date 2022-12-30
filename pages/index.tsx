@@ -26,7 +26,7 @@ export default function Home() {
           <br />
           <br />
           <h3>Welcome to Chat App</h3>
-          {/* <Link href="/mainPage">
+          {/* <Link href="/chats">
             <a>
               <Button colorScheme="blue" variant="solid">
                 Sign in with Google
