@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>My Chat App</title>
+        <title>My Chat App ongoing</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
