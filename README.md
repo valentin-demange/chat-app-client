@@ -2,9 +2,11 @@
 
 ## Work in progress 🚧
 
-The objective is to start from [my-chat-app-firebase](https://github.com/valentin-demange/my-chat-app-firebase), then replace firebase with a postgresql database
+The objective is to start from [chat-app-firebase](https://github.com/valentin-demange/chat-app-firebase) and replace firebase BaaS with an express backend (PERN stack)
 
-- Database: hosted on [Google Cloud Platform](https://cloud.google.com/sql)
+Architectural choices:
+
+- Database: Postgresql, hosted on [Heroku](https://www.heroku.com/)
 - ORM: [Prisma](https://www.prisma.io/)
 - Web socket: [ws](https://www.npmjs.com/package/ws)
 
