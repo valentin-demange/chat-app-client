@@ -26,8 +26,8 @@ export default function Home() {
           <br />
           <br />
           <h3>Welcome to Chat App</h3>
-          <div><Button className={styles.button} colorScheme='blue' >Log in</Button></div>
-          <div><Button className={styles.button} colorScheme='blue' variant='outline'>Sign up</Button></div>
+          <div><Button className={styles.button} colorScheme='blue'>Sign up</Button></div>
+          <div><Button className={styles.button} colorScheme='blue' variant='outline'>Log in</Button></div>
           {/* <Link href="/chats">
             <a>
               <Button colorScheme="blue" variant="solid">
