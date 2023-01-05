@@ -1,44 +1,34 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Box, Button } from "@chakra-ui/react";
 import Link from "next/link";
 import styles from "./index.module.css";
+import LoginMenu from "@/components/Login/main";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>My Chat App ongoing</title>
+        <title>My Chat App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        {/* <img src="/logo.png" alt="My Chat Logo" /> */}
+      <div className={styles.main}>
 
-        <div className={styles.card}>
           <Image
             priority
             src="/logo.png"
-            height={200}
-            width={200}
+            height={130}
+            width={130}
             alt="My Chat Logo"
           />
           <br />
           <br />
           <h3>Welcome to Chat App</h3>
-          <div><Button className={styles.button} colorScheme='blue'>Sign up</Button></div>
-          <div><Button className={styles.button} colorScheme='blue' variant='outline'>Log in</Button></div>
-          {/* <Link href="/chats">
-            <a>
-              <Button colorScheme="blue" variant="solid">
-                Sign in with Google
-              </Button>
-            </a>
-          </Link> */}
-        </div>
-      </main>
+          <LoginMenu />
 
-      <footer className={styles.footer}>
+      </div>
+
+      <div className={styles.footer}>
         <a
           href="https://github.com/valentin-demange"
           target="_blank"
@@ -46,7 +36,7 @@ export default function Home() {
         >
           &#128640; Copyright © 2023 Valentin Demange
         </a>
-      </footer>
+      </div>
     </div>
   );
 }

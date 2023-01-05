@@ -1,0 +1,32 @@
+.chatContainer {
+  width: 100%;
+}
+
+.homeButton {
+  margin: 5px 0px;
+  width: 100px;
+}
+
+.formButton {
+  margin: 5px 0px;
+  width: 100px;
+}
+
+.formButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.homeButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input {
+  margin: 5px 0px;
+  min-width: 800px;
+}
