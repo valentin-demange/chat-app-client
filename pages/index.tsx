@@ -26,6 +26,8 @@ export default function Home() {
           <br />
           <br />
           <h3>Welcome to Chat App</h3>
+          <div><Button className={styles.button} colorScheme='blue' >Log in</Button></div>
+          <div><Button className={styles.button} colorScheme='blue' variant='outline'>Sign up</Button></div>
           {/* <Link href="/chats">
             <a>
               <Button colorScheme="blue" variant="solid">
@@ -42,7 +44,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          &#128640; Copyright © 2022 Valentin Demange
+          &#128640; Copyright © 2023 Valentin Demange
         </a>
       </footer>
     </div>
