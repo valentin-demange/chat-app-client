@@ -21,9 +21,7 @@ export default function Home() {
             width={130}
             alt="My Chat Logo"
           />
-          <br />
-          <br />
-          <h3>Welcome to Chat App</h3>
+          <h3 className={styles.header}>Welcome to Chat App</h3>
           <LoginMenu />
 
       </div>
