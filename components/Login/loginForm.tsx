@@ -2,9 +2,6 @@ import React from "react";
 import styles from "./styles.module.css";
 import {
   Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
 } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Spacer } from "@chakra-ui/react";
@@ -21,15 +18,29 @@ export default function ({ cb }: { cb: any }) {
     return error;
   }
 
+  const handleSubmit = async (values: any, actions: any) => {
+    // event.preventDefault();
+    try {
+      const res = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) {
+        throw new Error(res.statusText);
+      }
+      // If the request is successful, do something with the response data
+    } catch (error:any) {
+      actions.setErrors({ apiError: error.message });
+    } finally {
+      actions.setSubmitting(false);
+    }
+  }
+
   return (
     <Formik
-      initialValues={{ email: "", password: ""}}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
-      }}
+      initialValues={{ username: "", password: ""}}
+      onSubmit={handleSubmit}
     >
       {(props) => (
         <Form>
@@ -56,7 +67,7 @@ export default function ({ cb }: { cb: any }) {
             <Spacer />
           </div>
 
-          <FormikInput fieldName={"email"} placeholder={"Email"} validateInput={validateInput} />
+          <FormikInput fieldName={"username"} placeholder={"Email"} validateInput={validateInput} />
           <FormikPasswordInput fieldName={"password"} validateInput={validateInput} />
         </Form>
       )}
