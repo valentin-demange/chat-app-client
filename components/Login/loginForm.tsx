@@ -1,13 +1,14 @@
 import React from "react";
 import styles from "./styles.module.css";
 import {
-  Button,
+  Button, FormErrorMessage,
 } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Spacer } from "@chakra-ui/react";
 // import PasswordInput from "./formikInputs";
 import { Field, Form, Formik } from "formik";
 import { FormikInput, FormikPasswordInput } from "./formikInputs";
+import { useRouter } from "next/router";
 
 export default function ({ cb }: { cb: any }) {
   function validateInput(value: string) {
@@ -17,6 +18,8 @@ export default function ({ cb }: { cb: any }) {
     }
     return error;
   }
+
+  const router = useRouter();
 
   const handleSubmit = async (values: any, actions: any) => {
     // event.preventDefault();
@@ -29,9 +32,11 @@ export default function ({ cb }: { cb: any }) {
       if (!res.ok) {
         throw new Error(res.statusText);
       }
-      // If the request is successful, do something with the response data
+      actions.resetForm();
+      // Navigate to the /chats route using the Router object
+      router.push('/chats');
     } catch (error:any) {
-      actions.setErrors({ apiError: error.message });
+      alert(error.message)
     } finally {
       actions.setSubmitting(false);
     }
