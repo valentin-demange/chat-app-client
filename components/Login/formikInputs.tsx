@@ -62,7 +62,11 @@ export function FormikInput({
           isInvalid={form.errors[fieldName] && form.touched[fieldName]}
         >
           <div className={styles.input}>
-            <Input {...field} placeholder={placeholder} />
+            {fieldName === "email" ? (
+              <Input {...field} placeholder={placeholder} type="email" />
+            ) : (
+              <Input {...field} placeholder={placeholder} />
+            )}
             {/* <FormErrorMessage>{form.errors.email}</FormErrorMessage> */}
           </div>
         </FormControl>
