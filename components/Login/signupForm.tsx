@@ -21,15 +21,33 @@ export default function ({ cb }: { cb: any }) {
     return error;
   }
 
+  const handleSubmit = async (values: any, actions: any) => {
+    // event.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/api/users/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!res.ok) {
+        const message = await res.text();
+        throw new Error([res.statusText, message].join("\n"));
+      }
+      actions.resetForm();
+      alert("Sign-up has been successful");
+      cb.goToHome();
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      actions.setSubmitting(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={{ firstName: "", lastName: "", email: "", password: "" }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
-      }}
+      onSubmit={handleSubmit}
     >
       {(props) => (
         <Form>

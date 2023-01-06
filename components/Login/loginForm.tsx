@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "./styles.module.css";
-import {
-  Button, FormErrorMessage,
-} from "@chakra-ui/react";
+import { Button, FormErrorMessage } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Spacer } from "@chakra-ui/react";
 // import PasswordInput from "./formikInputs";
@@ -24,27 +22,28 @@ export default function ({ cb }: { cb: any }) {
   const handleSubmit = async (values: any, actions: any) => {
     // event.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("http://localhost:3000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
       if (!res.ok) {
-        throw new Error(res.statusText);
+        const message = await res.text();
+        throw new Error([res.statusText, message].join("\n"));
       }
       actions.resetForm();
       // Navigate to the /chats route using the Router object
-      router.push('/chats');
-    } catch (error:any) {
-      alert(error.message)
+      router.push("/chats");
+    } catch (error: any) {
+      alert(error.message);
     } finally {
       actions.setSubmitting(false);
     }
-  }
+  };
 
   return (
     <Formik
-      initialValues={{ username: "", password: ""}}
+      initialValues={{ username: "", password: "" }}
       onSubmit={handleSubmit}
     >
       {(props) => (
@@ -72,11 +71,17 @@ export default function ({ cb }: { cb: any }) {
             <Spacer />
           </div>
 
-          <FormikInput fieldName={"username"} placeholder={"Email"} validateInput={validateInput} />
-          <FormikPasswordInput fieldName={"password"} validateInput={validateInput} />
+          <FormikInput
+            fieldName={"username"}
+            placeholder={"Email"}
+            validateInput={validateInput}
+          />
+          <FormikPasswordInput
+            fieldName={"password"}
+            validateInput={validateInput}
+          />
         </Form>
       )}
     </Formik>
   );
-
 }
