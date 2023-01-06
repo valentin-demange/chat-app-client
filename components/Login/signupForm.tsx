@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import { Button } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { Spacer } from "@chakra-ui/react";
-import PasswordInput from "./passwordInput";
+// import PasswordInput from "./formikInputs";
 
 export default function ({ cb }: { cb: any }) {
   return (
@@ -37,9 +37,9 @@ export default function ({ cb }: { cb: any }) {
       <div className={styles.input} >
         <Input placeholder="Email" />
       </div>
-      <div className={styles.input} >
+      {/* <div className={styles.input} >
         <PasswordInput />
-      </div>
+      </div> */}
     </div>
   );
 }
