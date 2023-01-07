@@ -2,44 +2,44 @@ import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import { CurrentChatContext, CurrentUserContext } from "utils/context";
+import useSWR from 'swr'
+import { Message } from "utils/customTypes";
+
 
 export default function ChatBody() {
-  const chatMessagesPath = [
-    "chats",
-    useContext(CurrentChatContext),
+  const chatMessagesUrl = [
+    // process.env.NEXT_API_URL,
+    "http://localhost:3000",
+    "api/chats",
+    // useContext(CurrentChatContext),
+    "1",
     "messages",
   ].join("/");
   const currentUser = useContext(CurrentUserContext);
 
-  // const recentMessagesQuery = query(
-  //   collection(db, chatMessagesPath),
-      
-  // );
+  const fetcher = (url: string): Promise<Message[]> => {
+    return fetch(url).then(response => response.json());
+  }
+  const { data , error, isLoading : loading } = useSWR(chatMessagesUrl, fetcher)
 
-  // const [value, loading, error] = useCollection(recentMessagesQuery, {
-  //   snapshotListenOptions: { includeMetadataChanges: true },
-  // });
+  // const value = true;
+  // const messagesList = [
+  //   <MessageOther key="2" profilePicUrl="" text="Hello world"></MessageOther>,
+  //   <MessageMe key="1" text="Hello world"></MessageMe>,
+  // ];
 
-  const value = true;
-  const messagesList = [
-    <MessageOther key="2" profilePicUrl="" text="Hello world"></MessageOther>,
-    <MessageMe key="1" text="Hello world"></MessageMe>,
-  ];
-
-  if (value) {
-    // debugger
-    // const listItems = value.docs.map((doc) => <p>{`Id: ${doc.id} \n Msg: ${doc.data().text}`}</p>)
-    // const messagesList = value.docs.map((doc) =>
-    //   currentUser.uid === doc.data().authorId ? (
-    //     <MessageMe key={doc.id} text={doc.data().text}></MessageMe>
-    //   ) : (
-    //     <MessageOther
-    //       key={doc.id}
-    //       profilePicUrl={doc.data().profilePicUrl}
-    //       text={doc.data().text}
-    //     ></MessageOther>
-    //   )
-    // );
+  if (data) {
+    const messagesList = data.map((msg) =>
+      currentUser.uid === msg.userId ? (
+        <MessageMe key={msg.id} text={msg.message}></MessageMe>
+      ) : (
+        <MessageOther
+          key={msg.id}
+          profilePicUrl={""}
+          text={msg.message}
+        ></MessageOther>
+      )
+    );
 
     return (
       <Box className={styles.chatBody}>
@@ -47,8 +47,8 @@ export default function ChatBody() {
       </Box>
     );
   }
-  // if (loading) return <div></div>;
-  // if (error) return <div>Error</div>;
+  if (loading) return <div>Loading ...</div>;
+  if (error) return <div>Error</div>;
   return <></>;
 
 }
@@ -89,3 +89,4 @@ function MessageMe({ text }: { text: string }) {
     </div>
   );
 }
+
