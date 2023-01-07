@@ -8,8 +8,7 @@ import { Message } from "utils/customTypes";
 
 export default function ChatBody() {
   const chatMessagesUrl = [
-    // process.env.NEXT_API_URL,
-    "http://localhost:3000",
+    process.env.NEXT_PUBLIC_API_URL,
     "api/chats",
     // useContext(CurrentChatContext),
     "1",
@@ -20,13 +19,7 @@ export default function ChatBody() {
   const fetcher = (url: string): Promise<Message[]> => {
     return fetch(url).then(response => response.json());
   }
-  const { data , error, isLoading : loading } = useSWR(chatMessagesUrl, fetcher)
-
-  // const value = true;
-  // const messagesList = [
-  //   <MessageOther key="2" profilePicUrl="" text="Hello world"></MessageOther>,
-  //   <MessageMe key="1" text="Hello world"></MessageMe>,
-  // ];
+  const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
 
   if (data) {
     const messagesList = data.map((msg) =>
@@ -47,7 +40,7 @@ export default function ChatBody() {
       </Box>
     );
   }
-  if (loading) return <div>Loading ...</div>;
+  if (isLoading) return <div>Loading ...</div>;
   if (error) return <div>Error</div>;
   return <></>;
 
