@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { CurrentUserContext, CurrentChatContext } from "utils/context";
 import askGilbert from "utils/askGilbert";
+import { checkGilbert, writeMessage } from "utils/chatsFunctions";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
@@ -22,11 +23,12 @@ export default function ChatFooter() {
     if (textMessage === "") return;
     setTextMessage("");
 
-    // writeMessage(currentChat, currentUser, textMessage)
-    // const chatGilbert = await checkGilbert(currentChat);
-    // if (chatGilbert) {
-    //   const answerGilbert = await askGilbert(chatGilbert, currentUser.displayName as string)
-    //   writeMessage(currentChat, {uid: "Gilbert", photoURL:"gilbert.png"} as User, answerGilbert)
+    await writeMessage(currentChat.id, currentUser.id, textMessage)
+    // const isGilbert = await checkGilbert(currentChat);
+    // if (isGilbert) {
+    //   messageList = await getMessages();
+    //   const answerGilbert = await askGilbert(chatGilbert, currentUser.firstName as string)
+    //   await writeMessage(currentChat, "1", answerGilbert)
     // }
   };
 

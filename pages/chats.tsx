@@ -10,11 +10,18 @@ import {
 
 export default function ChatApp() {
   // const [currentUser, loading, error] = useAuthState(auth as any);
-  const currentUser = {
-    uid: "Valentin",
-  }
-  const [currentChat, setCurrentChat] = useState("public");
-
+  const [currentUser, setCurrentUser] = useState({
+    id: 19,
+    email: "toto@gmail.com",
+    firstName: "Jane",
+    lastName: "Doe",
+    avatar: "",
+  });
+  const [currentChat, setCurrentChat] = useState({
+    id: "1",
+    name: "Général",
+    type: "public",
+  });
 
   if (currentUser)
     return (
