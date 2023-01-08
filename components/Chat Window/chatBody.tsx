@@ -35,13 +35,13 @@ export default function ChatBody() {
     );
 
     return (
-      <Box className={styles.chatBody}>
+      <div className={styles.chatBody}>
         <ul>{messagesList}</ul>
-      </Box>
+      </div>
     );
   }
-  if (isLoading) return <div>Loading ...</div>;
-  if (error) return <div>Error</div>;
+  if (isLoading) return <div className={styles.chatBody}>Loading...</div>;
+  if (error) return <div className={styles.chatBody}>Error</div>;
   return <></>;
 
 }
