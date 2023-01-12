@@ -3,11 +3,11 @@ import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
-import { UserContext, SetCurrentChatContext } from "utils/context";
+import { UserContext, ChatContext } from "utils/context";
 
 export default function SideBarChatItem({ chatId } : {chatId : string}) {
   const currentUser = useContext(UserContext);
-  const SetCurrentChat = useContext(SetCurrentChatContext);
+  const chatContext = useContext(ChatContext);
 
   // const [chatInfo, loading, error] = useDocumentData(doc(db, "chats", chatId), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
@@ -31,7 +31,7 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
         className={styles.sbItem}
         variant="ghost"
         padding={0}
-        onClick={() => SetCurrentChat(chatInfo.chatId)}
+        onClick={() => chatContext.setCurrentChat(chatInfo.chatId)}
       >
 
         {/* AVATAR */}

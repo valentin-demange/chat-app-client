@@ -11,14 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
-import { ChatContext, UserContext, SetCurrentChatContext } from "utils/context";
+import { ChatContext, UserContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 
 export default function ChatHeader() {
   const currentUser = useContext(UserContext);
-  const currentChat = useContext(ChatContext);
-  const SetCurrentChat = useContext(SetCurrentChatContext);
+  const chatContext = useContext(ChatContext);
 
   // const [chatInfo, loading, error] = useDocumentData(
   //   doc(db, "chats", currentChat),
@@ -42,7 +41,7 @@ export default function ChatHeader() {
 
       const handleOnClick = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        SetCurrentChat("public");
+        chatContext.setCurrentChat("public");
         // await deleteDoc(doc(db, ["users", currentUser.uid, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, "chats", chatInfo.chatId)); 

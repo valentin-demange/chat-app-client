@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import {
   UserContext,
   ChatContext,
-  SetCurrentChatContext,
 } from "utils/context";
 
 export default function ChatApp() {
@@ -27,11 +26,9 @@ export default function ChatApp() {
     return (
       <div className={styles.container}>
         <UserContext.Provider value={currentUser}>
-          <ChatContext.Provider value={currentChat}>
-            <SetCurrentChatContext.Provider value={setCurrentChat}>
+          <ChatContext.Provider value={{currentChat: currentChat, setCurrentChat: setCurrentChat}}>
               <SideBar />
               <ChatWindow />
-            </SetCurrentChatContext.Provider>
           </ChatContext.Provider>
         </UserContext.Provider>
       </div>

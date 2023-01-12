@@ -9,7 +9,7 @@ import { checkGilbert, writeMessage } from "utils/chatsFunctions";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
-  const currentChat = useContext(ChatContext);
+  const chatContext = useContext(ChatContext);
   const currentUser = useContext(UserContext);
 
   const handleInputChange = (e: {
@@ -23,12 +23,12 @@ export default function ChatFooter() {
     if (textMessage === "") return;
     setTextMessage("");
 
-    await writeMessage(currentChat.id, currentUser.id, textMessage)
-    // const isGilbert = await checkGilbert(currentChat);
+    await writeMessage(chatContext.currentChat.id, currentUser.id, textMessage)
+    // const isGilbert = await checkGilbert(chatContext.currentChat);
     // if (isGilbert) {
     //   messageList = await getMessages();
     //   const answerGilbert = await askGilbert(chatGilbert, currentUser.firstName as string)
-    //   await writeMessage(currentChat, "1", answerGilbert)
+    //   await writeMessage(chatContext.currentChat, "1", answerGilbert)
     // }
   };
 
