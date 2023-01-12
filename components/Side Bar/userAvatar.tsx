@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useContext } from 'react';
-import { CurrentUserContext } from 'utils/context';
+import { UserContext } from 'utils/context';
 
 
 const logout = () => {
@@ -18,7 +18,7 @@ const logout = () => {
 };
 
 export default function UserAvatar() {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(UserContext);
 
     return (
       <Menu>

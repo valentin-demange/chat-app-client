@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { ChatContext, CurrentUserContext } from "utils/context";
+import { ChatContext, UserContext } from "utils/context";
 import useSWR from 'swr'
 import { Message } from "utils/customTypes";
 
@@ -14,7 +14,7 @@ export default function ChatBody() {
     "1",
     "messages",
   ].join("/");
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(UserContext);
 
   const fetcher = (url: string): Promise<Message[]> => {
     return fetch(url).then(response => response.json());

@@ -3,10 +3,10 @@ import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
-import { CurrentUserContext, SetCurrentChatContext } from "utils/context";
+import { UserContext, SetCurrentChatContext } from "utils/context";
 
 export default function SideBarChatItem({ chatId } : {chatId : string}) {
-  const currentUser = useContext(CurrentUserContext);
+  const currentUser = useContext(UserContext);
   const SetCurrentChat = useContext(SetCurrentChatContext);
 
   // const [chatInfo, loading, error] = useDocumentData(doc(db, "chats", chatId), {

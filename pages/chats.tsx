@@ -3,7 +3,7 @@ import SideBar from "@/components/Side Bar/main";
 import ChatWindow from "@/components/Chat Window/main";
 import React, { useEffect, useState } from "react";
 import {
-  CurrentUserContext,
+  UserContext,
   ChatContext,
   SetCurrentChatContext,
 } from "utils/context";
@@ -26,14 +26,14 @@ export default function ChatApp() {
   if (currentUser)
     return (
       <div className={styles.container}>
-        <CurrentUserContext.Provider value={currentUser}>
+        <UserContext.Provider value={currentUser}>
           <ChatContext.Provider value={currentChat}>
             <SetCurrentChatContext.Provider value={setCurrentChat}>
               <SideBar />
               <ChatWindow />
             </SetCurrentChatContext.Provider>
           </ChatContext.Provider>
-        </CurrentUserContext.Provider>
+        </UserContext.Provider>
       </div>
     );
 
