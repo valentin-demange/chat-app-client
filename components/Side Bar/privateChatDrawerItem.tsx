@@ -9,8 +9,6 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
   const currentUser = useContext(UserContext);
   const chatContext = useContext(ChatContext);
 
-  const SetCurrentChat = useContext(SetCurrentChatContext);
-
   const handleOnClick = async () => {
     // e.preventDefault();
     // Add a new document with a generated id.
