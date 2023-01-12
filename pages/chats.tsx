@@ -2,12 +2,13 @@ import styles from "./chats.module.css";
 import SideBar from "@/components/Side Bar/main";
 import ChatWindow from "@/components/Chat Window/main";
 import React, { useEffect, useState } from "react";
-import {
-  UserContext,
-  ChatContext,
-} from "utils/context";
+import { UserContext, ChatContext } from "utils/context";
+import { io } from "socket.io-client";
+import { SocketContext } from "utils/context";
 
 export default function ChatApp() {
+  const socket = io("http://localhost:3000", { transports: ["websocket"] });
+
   // const [currentUser, loading, error] = useAuthState(auth as any);
   const [currentUser, setCurrentUser] = useState({
     id: 19,
@@ -26,9 +27,13 @@ export default function ChatApp() {
     return (
       <div className={styles.container}>
         <UserContext.Provider value={currentUser}>
-          <ChatContext.Provider value={{currentChat: currentChat, setCurrentChat: setCurrentChat}}>
+          <ChatContext.Provider
+            value={{ currentChat: currentChat, setCurrentChat: setCurrentChat }}
+          >
+            <SocketContext.Provider value={socket}>
               <SideBar />
               <ChatWindow />
+            </SocketContext.Provider>
           </ChatContext.Provider>
         </UserContext.Provider>
       </div>
