@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { CurrentChatContext, CurrentUserContext } from "utils/context";
+import { ChatContext, CurrentUserContext } from "utils/context";
 import useSWR from 'swr'
 import { Message } from "utils/customTypes";
 
@@ -10,7 +10,7 @@ export default function ChatBody() {
   const chatMessagesUrl = [
     process.env.NEXT_PUBLIC_API_URL,
     "api/chats",
-    // useContext(CurrentChatContext),
+    // useContext(ChatContext),
     "1",
     "messages",
   ].join("/");

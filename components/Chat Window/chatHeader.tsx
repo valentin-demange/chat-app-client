@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
-import { CurrentChatContext, CurrentUserContext, SetCurrentChatContext } from "utils/context";
+import { ChatContext, CurrentUserContext, SetCurrentChatContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 
 export default function ChatHeader() {
   const currentUser = useContext(CurrentUserContext);
-  const currentChat = useContext(CurrentChatContext);
+  const currentChat = useContext(ChatContext);
   const SetCurrentChat = useContext(SetCurrentChatContext);
 
   // const [chatInfo, loading, error] = useDocumentData(
