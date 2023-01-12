@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Avatar, Text } from "@chakra-ui/react";
 import styles from "./styles.module.css";
-import { UserContext, SetCurrentChatContext } from "utils/context";
+import { UserContext, ChatContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:string, handleCloseDrawer:any}) {
   const currentUser = useContext(UserContext);
+  const chatContext = useContext(ChatContext);
+
   const SetCurrentChat = useContext(SetCurrentChatContext);
 
   const handleOnClick = async () => {
@@ -20,7 +22,7 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
     //   // currentUser must be placed first. Reason: We check the SECOND member of the chat as being Gilbert or not
     //   membersUid: [currentUser!.uid, userUid], 
     //   private: true,
-    // }).then(() => SetCurrentChat(chatId)); 
+    // }).then(() => chatContext.setCurrentChat(chatId)); 
     // await setDoc(doc(db, ["users", userUid, "chats"].join("/"), chatId), {
     //   chatId: chatId,
     // }); 
