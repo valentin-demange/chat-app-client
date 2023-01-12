@@ -16,7 +16,7 @@ export default function ChatBody() {
   const currentUser = useContext(UserContext);
 
   const fetcher = (url: string): Promise<Message[]> => {
-    return fetch(url).then(response => response.json());
+    return fetch(url, {credentials: 'include'}).then(response => response.json());
   }
   const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
 

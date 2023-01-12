@@ -8,9 +8,9 @@ import { SocketContext } from "utils/context";
 
 export default function ChatApp() {
   const socket = io("http://localhost:3000", { transports: ["websocket"] });
-  socket.on('connect', () => {
-    console.log('Connected to WebSockets server');
-  });
+  // socket.on('connect', () => {
+  //   console.log('Connected to WebSockets server');
+  // });
   
   // const [currentUser, loading, error] = useAuthState(auth as any);
   const [currentUser, setCurrentUser] = useState({

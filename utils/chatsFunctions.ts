@@ -9,6 +9,7 @@ export async function writeMessage(
     const res = await fetch("http://localhost:3000/api/messages/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: 'include',
       body: JSON.stringify({
         chatId: chatId,
         userId: userId,
@@ -29,6 +30,7 @@ export async function checkGilbert(chatId: string): Promise<Message[]> {
     const res = await fetch("http://localhost:3000/api/chats/" + chatId, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
+      credentials: 'include',
     });
     if (!res.ok) {
       const message = await res.text();

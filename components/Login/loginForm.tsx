@@ -26,7 +26,8 @@ export default function ({ cb }: { cb: any }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
-      });
+        credentials: 'include',
+            });
       if (!res.ok) {
         const message = await res.text();
         throw new Error([res.statusText, message].join("\n"));

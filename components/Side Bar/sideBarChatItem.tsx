@@ -22,6 +22,18 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
     chatId: "1",
   }
 
+  const onClick = async () => {
+    // event.preventDefault();
+      const res = await fetch("http://localhost:3000/api/users/test", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        // body: JSON.stringify(""),
+    })
+    console.log("Fetched!")
+  };
+
+
   if (chatInfo) {
     const memberUid = chatInfo.private
       ? chatInfo.membersUid.filter((uid : string) => currentUser.uid !== uid)[0]
@@ -31,7 +43,8 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
         className={styles.sbItem}
         variant="ghost"
         padding={0}
-        onClick={() => chatContext.setCurrentChat(chatInfo.chatId)}
+        // onClick={() => chatContext.setCurrentChat(chatInfo.chatId)}
+        onClick={onClick}
       >
 
         {/* AVATAR */}
