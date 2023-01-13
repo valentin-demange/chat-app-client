@@ -2,7 +2,6 @@ import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { SocketContext, UserContext } from "utils/context";
-import useSWR from "swr";
 import { Message } from "utils/customTypes";
 
 export default function ChatBody() {
@@ -17,11 +16,16 @@ export default function ChatBody() {
   const socket = useContext(SocketContext);
   const chatId = 1;
 
-  const fetcher = (url: string): Promise<Message[]> => {
-    return fetch(url, { credentials: "include" }).then((response) =>
-      response.json()
-    );
-  };
+  // const fetcher = (url: string): Promise<Message[]> => {
+  //   return fetch(url, { credentials: "include" }).then((response) =>
+  //     response.json()
+  //   );
+  // };
+  //     const { data, error, isLoading } = useSWR(
+  //     `${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`,
+  //     fetcher
+  //   );
+
   // const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
 
   useEffect(() => {
@@ -30,10 +34,6 @@ export default function ChatBody() {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`, { credentials: "include" })
       .then((res) => res.json())
       .then(setMessages);
-    // const { data, error, isLoading } = useSWR(
-    //   `${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`,
-    //   fetcher
-    // );
 
     // Emit the 'join chat room' event with the chatId as parameter
     console.log(`Join chat room n°${chatId}`);
