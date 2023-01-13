@@ -27,7 +27,7 @@ export default function ChatBody() {
   useEffect(() => {
     // Fetch the messages when the component mounts
     console.log(`Fetching messages of chat room n°${chatId}`);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`, { credentials: "include" })
       .then((res) => res.json())
       .then(setMessages);
     // const { data, error, isLoading } = useSWR(
