@@ -10,11 +10,25 @@ import {
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useContext } from 'react';
 import { UserContext } from 'utils/context';
+import router from "next/router";
 
 
-const logout = () => {
-  // signOut(auth);
-  window.location.href = "/";
+const logout = async () => {
+  
+  try {
+    const res = await fetch("http://localhost:3000/api/users/logout", {
+      method: "GET",
+      credentials: 'include',
+    });
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error([res.statusText, message].join("\n"));
+    }
+    router.push("/")
+  } catch (error: any) {
+    alert(error.message);
+  }
+
 };
 
 export default function UserAvatar() {
@@ -32,7 +46,7 @@ export default function UserAvatar() {
           size="lg"
         />
         <MenuList>
-          <MenuItem icon={<ExternalLinkIcon />} onClick={() => logout()}>
+          <MenuItem icon={<ExternalLinkIcon />} onClick={logout}>
             Log Out
           </MenuItem>
         </MenuList>
