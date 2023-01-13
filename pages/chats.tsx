@@ -13,24 +13,28 @@ import router from "next/router";
 export default function ChatApp() {
   const socket = io("http://localhost:3000", { transports: ["websocket"] });
 
-  const fetcher = (url: string): Promise<User> => {
-    return fetch(url, { credentials: "include" }).then((response) =>
-      response.json()
-    );
-  };
-  const { data: currentUser, error, isLoading } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/users/current`,
-    fetcher
-  );
 
-  // const [currentUser, setCurrentUser] = useState({
-  //   id: 19,
-  //   email: "toto@gmail.com",
-  //   firstName: "Jane",
-  //   lastName: "Doe",
-  //   avatar:
-  //     "https://lh3.googleusercontent.com/a-/ACNPEu8kjnmJvl4MDxjoSbcOBrU1Vdzm6FbUp8O3Y50ZLLQ=s96-c",
-  // });
+    const [currentUser, setCurrentUser] = useState({
+      id: 19,
+      email: "toto@gmail.com",
+      firstName: "Jane",
+      lastName: "Doe",
+      avatar:
+        "https://lh3.googleusercontent.com/a-/ACNPEu8kjnmJvl4MDxjoSbcOBrU1Vdzm6FbUp8O3Y50ZLLQ=s96-c",
+    });
+    const isLoading = false; const error = false;
+
+    // const fetcher = (url: string): Promise<User> => {
+    //   return fetch(url, { credentials: "include" }).then((response) =>
+    //     response.json()
+    //   );
+    // };
+  
+    // const {
+    //   data: currentUser,
+    //   error,
+    //   isLoading,
+    // } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/current`, fetcher);
 
   const [currentChat, setCurrentChat] = useState({
     id: 1,

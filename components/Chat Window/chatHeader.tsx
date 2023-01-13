@@ -14,6 +14,8 @@ import React, { useContext } from "react";
 import { ChatContext, UserContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
+import { ChatInfo } from "utils/customTypes";
+import useSWR from "swr";
 
 export default function ChatHeader() {
   const currentUser = useContext(UserContext);
@@ -24,18 +26,30 @@ export default function ChatHeader() {
   //   { snapshotListenOptions: { includeMetadataChanges: true } }
   // );
 
-  const chatInfo = {
-    private: false,
-    membersUid: [1],
-    name: "General",
-    avatarPic: "",
-    lastMessage: 0,
-  }
+      const fetcher = (url: string): Promise<ChatInfo> => {
+      return fetch(url, { credentials: "include" }).then((response) =>
+        response.json()
+      );
+    };
+  
+    const {
+      data: chatInfo,
+      error,
+      isLoading,
+    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatContext.currentChat.id.toString()}`, fetcher);
+
+
+  // const chatInfo = {
+  //   type: "public",
+  //   membersUid: [1],
+  //   name: "General",
+  //   avatar: "",
+  //   lastMessage: 0,
+  // }
 
   if (chatInfo) {
-
   
-    const memberUid = chatInfo.private
+    const memberUid = chatInfo.type == 'private'
       ? chatInfo.membersUid.filter((uid : number) => currentUser.id !== uid)[0]
       : 0;
 
@@ -51,18 +65,18 @@ export default function ChatHeader() {
       return (
       <Box borderColor="gray.400" className={styles.chatHeader}>
         {/* AVATAR */}
-        {chatInfo.private ? (
+        {chatInfo.type == 'private' ? (
           <AvatarUser uid={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}
             backgroundColor="gray.200"
-            src={chatInfo.avatarPic}
+            src={chatInfo.avatar}
           />
         )}
         <div className={styles.chatHeaderLabel}>
           {/* CHAT NAME */}
-          {chatInfo.private ? (
+          {chatInfo.type == 'private' ? (
             <TextUser uid={memberUid} />
           ) : (
             <Text fontSize="18px" fontWeight="normal">
@@ -87,13 +101,13 @@ export default function ChatHeader() {
             fontSize={20}
           />
           <MenuList>
-            {chatInfo.private ? <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} onClick={handleOnClick} /> : <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} isDisabled />}
+            {chatInfo.type == 'private' ? <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} onClick={handleOnClick} /> : <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} isDisabled />}
           </MenuList>
         </Menu>
       </Box>
     );
   }
-  // if (loading) return <></>;
-  // if (error) return <div>Error</div>;
+  if (isLoading) return <></>;
+  if (error) return <div>Error</div>;
   return <></>
 }

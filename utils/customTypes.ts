@@ -19,3 +19,11 @@ export interface Message {
     lastName: string;
     avatar: string;
   }
+
+  export interface ChatInfo {
+    type: string;
+    membersUid: number[];
+    name: string;
+    avatar: string;
+    lastMessage: string;
+  }

@@ -48,10 +48,8 @@ export default function ChatBody() {
   }, [chatId]);
 
   useEffect(() => {
-    // Emit the 'join chat room' event with the chatId as parameter
     console.log(`Receiving new message`);
     socket.on("new message", (message: Message) => {
-      // setMessages([...messages, message]);
       setMessages((prevMessages) => [...prevMessages, message]);
     });
   }, [chatId]);
