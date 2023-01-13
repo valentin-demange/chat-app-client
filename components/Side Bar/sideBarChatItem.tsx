@@ -36,7 +36,7 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
 
   if (chatInfo) {
     const memberUid = chatInfo.private
-      ? chatInfo.membersUid.filter((uid : string) => currentUser.uid !== uid)[0]
+      ? chatInfo.membersUid.filter((uid : string) => currentUser.id !== uid)[0]
       : "General";
     return (
       <Button

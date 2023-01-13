@@ -8,7 +8,7 @@ import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
 export default function SideBarChats() {
   const currentUser = useContext(UserContext);
   // const [value, loading, error] = useCollectionData(
-  //   collection(db, ["users", currentUser.uid, "chats"].join("/")),
+  //   collection(db, ["users", currentUser.id, "chats"].join("/")),
   //   {
   //     snapshotListenOptions: { includeMetadataChanges: true },
   //   }

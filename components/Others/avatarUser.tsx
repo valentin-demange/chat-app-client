@@ -1,7 +1,7 @@
 import { Avatar } from "@chakra-ui/react";
 import React from "react";
 
-export default function AvatarUser({ uid } : {uid:string}) {
+export default function AvatarUser({ uid } : {uid:number}) {
   // const [userInfo, loading, error] = useDocumentData(doc(db, "users", uid), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });

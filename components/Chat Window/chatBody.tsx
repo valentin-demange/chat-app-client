@@ -1,10 +1,9 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
-import React, { useContext } from "react";
-import { UserContext } from "utils/context";
-import useSWR from 'swr'
+import React, { useContext, useEffect, useState } from "react";
+import { SocketContext, UserContext } from "utils/context";
+import useSWR from "swr";
 import { Message } from "utils/customTypes";
-
 
 export default function ChatBody() {
   const chatMessagesUrl = [
@@ -14,15 +13,53 @@ export default function ChatBody() {
     "messages",
   ].join("/");
   const currentUser = useContext(UserContext);
+  const [messages, setMessages] = useState([] as Message[]);
+  const socket = useContext(SocketContext);
+  const chatId = 1;
 
   const fetcher = (url: string): Promise<Message[]> => {
-    return fetch(url, {credentials: 'include'}).then(response => response.json());
-  }
-  const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
+    return fetch(url, { credentials: "include" }).then((response) =>
+      response.json()
+    );
+  };
+  // const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
 
-  if (data) {
-    const messagesList = data.map((msg) =>
-      currentUser.uid === msg.userId ? (
+  useEffect(() => {
+    // Fetch the messages when the component mounts
+    console.log(`Fetching messages of chat room n°${chatId}`);
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`)
+      .then((res) => res.json())
+      .then(setMessages);
+    // const { data, error, isLoading } = useSWR(
+    //   `${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`,
+    //   fetcher
+    // );
+
+    // Emit the 'join chat room' event with the chatId as parameter
+    console.log(`Join chat room n°${chatId}`);
+    socket.emit("join chat room", chatId);
+
+    // Clean up the listener when the component unmounts
+    return () => {
+      // Emit the 'leave chat room' event with the chatId as parameter
+      console.log(`Leave chat room n°${chatId}`);
+      socket.emit("leave chat room", chatId);
+    };
+  }, [chatId]);
+
+  useEffect(() => {
+    // Emit the 'join chat room' event with the chatId as parameter
+    console.log(`Receiving new message`);
+    socket.on("new message", (message: Message) => {
+      // setMessages([...messages, message]);
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, [chatId]);
+
+
+  if (messages) {
+    const messagesList = messages.map((msg) =>
+      currentUser.id === msg.userId ? (
         <MessageMe key={msg.id} text={msg.message}></MessageMe>
       ) : (
         <MessageOther
@@ -39,10 +76,9 @@ export default function ChatBody() {
       </div>
     );
   }
-  if (isLoading) return <div className={styles.chatBody}>Loading...</div>;
-  if (error) return <div className={styles.chatBody}>Error</div>;
+  // if (isLoading) return <div className={styles.chatBody}>Loading...</div>;
+  // if (error) return <div className={styles.chatBody}>Error</div>;
   return <></>;
-
 }
 
 function MessageOther({
@@ -81,4 +117,3 @@ function MessageMe({ text }: { text: string }) {
     </div>
   );
 }
-

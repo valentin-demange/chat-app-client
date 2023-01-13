@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import React from "react";
 
-export default function TextUser({ uid } : {uid:string}) {
+export default function TextUser({ uid } : {uid:number}) {
   // const [userInfo, loading, error] = useDocumentData(doc(db, "users", uid), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });

@@ -3,7 +3,7 @@ import { Box, IconButton, Input } from "@chakra-ui/react";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useContext } from "react";
-import { UserContext, ChatContext } from "utils/context";
+import { UserContext, ChatContext, SocketContext } from "utils/context";
 import askGilbert from "utils/askGilbert";
 import { checkGilbert, writeMessage } from "utils/chatsFunctions";
 
@@ -11,6 +11,8 @@ export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
   const chatContext = useContext(ChatContext);
   const currentUser = useContext(UserContext);
+  const socket = useContext(SocketContext);
+
 
   const handleInputChange = (e: {
     target: { value: React.SetStateAction<string> };
@@ -31,6 +33,34 @@ export default function ChatFooter() {
     //   await writeMessage(chatContext.currentChat, "1", answerGilbert)
     // }
   };
+
+  const writeMessage = async (
+    chatId: number,
+    userId: number,
+    textMessage: string
+  ) => {
+    try {
+      const res = await fetch("http://localhost:3000/api/messages/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+          chatId: chatId,
+          userId: userId,
+          message: textMessage,
+        }),
+      });
+      if (!res.ok) {
+        const message = await res.text();
+        throw new Error([res.statusText, message].join("\n"));
+      }
+      const message = await res.json();
+      // Emit the 'send message' event with the message and chatId as parameters
+      socket.emit('send message', message, chatId);
+    } catch (error: any) {
+      alert(error.message);
+    }
+  }
 
 
   return (

@@ -1,7 +1,12 @@
 import { createContext } from 'react';
-import { Chat } from './customTypes';
+import { Chat, User } from './customTypes';
 
-export const UserContext = createContext({} as any)
-export const ChatContext = createContext({} as any)
+interface ChatContext {
+    currentChat: Chat;
+    setCurrentChat: any;
+  }
+
+export const UserContext = createContext({} as User)
+export const ChatContext = createContext({} as ChatContext)
 export const SocketContext = createContext({} as any)
 

@@ -25,12 +25,12 @@ export default function PrivateChatDrawer() {
 
   if (value) {
     // const listItems = value
-    //   .filter((val) => val.uid !== currentUser.uid)
+    //   .filter((val) => val.uid !== currentUser.id)
     //   .map((val) => <PrivateChatDrawerItem key={val.uid} userUid={val.uid} handleCloseDrawer={onClose} />);
 
-    const uidToDisplay = ["Gilbert", "Na06PbrSwOa2ojgaxG8WkORdzOx1"];
+    const uidToDisplay = [1, 2];
     const listItems = uidToDisplay
-      .filter((userId) => userId !== currentUser.uid)
+      .filter((userId) => userId !== currentUser.id)
       .map((userId) => <PrivateChatDrawerItem key={userId} userUid={userId} handleCloseDrawer={onClose} />);
 
     return (

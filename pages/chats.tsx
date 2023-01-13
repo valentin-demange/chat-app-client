@@ -21,7 +21,7 @@ export default function ChatApp() {
     avatar: "",
   });
   const [currentChat, setCurrentChat] = useState({
-    id: "1",
+    id: 1,
     name: "Général",
     type: "public",
   });

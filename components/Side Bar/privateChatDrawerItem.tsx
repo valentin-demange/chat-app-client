@@ -5,7 +5,7 @@ import { UserContext, ChatContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 
-export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:string, handleCloseDrawer:any}) {
+export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
   const currentUser = useContext(UserContext);
   const chatContext = useContext(ChatContext);
 
@@ -24,7 +24,7 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
     // await setDoc(doc(db, ["users", userUid, "chats"].join("/"), chatId), {
     //   chatId: chatId,
     // }); 
-    // await setDoc(doc(db, ["users", currentUser.uid, "chats"].join("/"), chatId), {
+    // await setDoc(doc(db, ["users", currentUser.id, "chats"].join("/"), chatId), {
     //   chatId: chatId,
     // });
     handleCloseDrawer();

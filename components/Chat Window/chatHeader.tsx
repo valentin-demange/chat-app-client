@@ -26,7 +26,7 @@ export default function ChatHeader() {
 
   const chatInfo = {
     private: false,
-    membersUid: ["General"],
+    membersUid: [1],
     name: "General",
     avatarPic: "",
     lastMessage: 0,
@@ -36,13 +36,13 @@ export default function ChatHeader() {
 
   
     const memberUid = chatInfo.private
-      ? chatInfo.membersUid.filter((uid : string) => currentUser.uid !== uid)[0]
-      : "General";
+      ? chatInfo.membersUid.filter((uid : number) => currentUser.id !== uid)[0]
+      : 0;
 
       const handleOnClick = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         chatContext.setCurrentChat("public");
-        // await deleteDoc(doc(db, ["users", currentUser.uid, "chats", chatInfo.chatId].join("/"))); 
+        // await deleteDoc(doc(db, ["users", currentUser.id, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, "chats", chatInfo.chatId)); 
         // console.log("Chat ID ", chatInfo.chatId, "has been deleted");
