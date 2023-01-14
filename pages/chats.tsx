@@ -36,19 +36,14 @@ export default function ChatApp() {
     //   isLoading,
     // } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/current`, fetcher);
 
-  const [currentChat, setCurrentChat] = useState({
-    id: 1,
-    name: "Général",
-    type: "public",
-    avatar: "",
-  });
+  const [currentChatId, setCurrentChatId] = useState(1);
 
   if (currentUser)
     return (
       <div className={styles.container}>
         <UserContext.Provider value={currentUser}>
           <ChatContext.Provider
-            value={{ currentChat: currentChat, setCurrentChat: setCurrentChat }}
+            value={{ currentChatId: currentChatId, setCurrentChatId: setCurrentChatId }}
           >
             <SocketContext.Provider value={socket}>
               <SideBar />

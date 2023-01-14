@@ -9,7 +9,7 @@ import { checkGilbert, writeMessage } from "utils/chatsFunctions";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
-  const chatContext = useContext(ChatContext);
+  const chatId = useContext(ChatContext).currentChatId;
   const currentUser = useContext(UserContext);
   const socket = useContext(SocketContext);
 
@@ -25,7 +25,7 @@ export default function ChatFooter() {
     if (textMessage === "") return;
     setTextMessage("");
 
-    await writeMessage(chatContext.currentChat.id, currentUser.id, textMessage)
+    await writeMessage(chatId, currentUser.id, textMessage)
     // const isGilbert = await checkGilbert(chatContext.currentChat);
     // if (isGilbert) {
     //   messageList = await getMessages();

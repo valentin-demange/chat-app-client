@@ -19,7 +19,7 @@ import useSWR from "swr";
 
 export default function ChatHeader() {
   const currentUser = useContext(UserContext);
-  const chatContext = useContext(ChatContext);
+  const chatId = useContext(ChatContext).currentChatId;
 
   // const [chatInfo, loading, error] = useDocumentData(
   //   doc(db, "chats", currentChat),
@@ -36,7 +36,7 @@ export default function ChatHeader() {
       data: chatInfo,
       error,
       isLoading,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatContext.currentChat.id.toString()}`, fetcher);
+    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId.toString()}`, fetcher);
 
 
   // const chatInfo = {

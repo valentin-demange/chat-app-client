@@ -8,7 +8,6 @@ import { User } from "utils/customTypes";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
   const currentUser = useContext(UserContext);
-  const chatContext = useContext(ChatContext);
 
   const handleOnClick = async () => {
     // e.preventDefault();

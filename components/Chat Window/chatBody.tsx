@@ -1,32 +1,16 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-import { SocketContext, UserContext } from "utils/context";
+import { ChatContext, SocketContext, UserContext } from "utils/context";
 import { Message } from "utils/customTypes";
 
 export default function ChatBody() {
-  const chatMessagesUrl = [
-    process.env.NEXT_PUBLIC_API_URL,
-    "api/chats",
-    "1",
-    "messages",
-  ].join("/");
+
   const currentUser = useContext(UserContext);
   const [messages, setMessages] = useState([] as Message[]);
   const socket = useContext(SocketContext);
-  const chatId = 1;
+  const chatId = useContext(ChatContext).currentChatId;
 
-  // const fetcher = (url: string): Promise<Message[]> => {
-  //   return fetch(url, { credentials: "include" }).then((response) =>
-  //     response.json()
-  //   );
-  // };
-  //     const { data, error, isLoading } = useSWR(
-  //     `${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`,
-  //     fetcher
-  //   );
-
-  // const { data , error, isLoading } = useSWR(chatMessagesUrl, fetcher)
 
   useEffect(() => {
     // Fetch the messages when the component mounts

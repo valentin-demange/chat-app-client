@@ -51,7 +51,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
         className={styles.sbItem}
         variant="ghost"
         padding={0}
-        onClick={() => chatContext.setCurrentChat(chatInfo.id)}
+        onClick={() => chatContext.setCurrentChatId(chatInfo.id)}
         // onClick={onClick}
       >
 
