@@ -9,32 +9,33 @@ import { Message, User } from "utils/customTypes";
 import useSWR from "swr";
 import Router from "next/router";
 import router from "next/router";
+import { API_URL } from "config";
 
 export default function ChatApp() {
   const socket = io("http://localhost:3000", { transports: ["websocket"] });
 
 
-    const [currentUser, setCurrentUser] = useState({
-      id: 19,
-      email: "toto@gmail.com",
-      firstName: "Jane",
-      lastName: "Doe",
-      avatar:
-        "https://lh3.googleusercontent.com/a-/ACNPEu8kjnmJvl4MDxjoSbcOBrU1Vdzm6FbUp8O3Y50ZLLQ=s96-c",
-    });
-    const isLoading = false; const error = false;
+    // const [currentUser, setCurrentUser] = useState({
+    //   id: 19,
+    //   email: "toto@gmail.com",
+    //   firstName: "Jane",
+    //   lastName: "Doe",
+    //   avatar:
+    //     "https://lh3.googleusercontent.com/a-/ACNPEu8kjnmJvl4MDxjoSbcOBrU1Vdzm6FbUp8O3Y50ZLLQ=s96-c",
+    // });
+    // const isLoading = false; const error = false;
 
-    // const fetcher = (url: string): Promise<User> => {
-    //   return fetch(url, { credentials: "include" }).then((response) =>
-    //     response.json()
-    //   );
-    // };
+    const fetcher = (url: string): Promise<User> => {
+      return fetch(url, { credentials: "include" }).then((response) =>
+        response.json()
+      );
+    };
   
-    // const {
-    //   data: currentUser,
-    //   error,
-    //   isLoading,
-    // } = useSWR(`${API_URL}/api/users/current`, fetcher);
+    const {
+      data: currentUser,
+      error,
+      isLoading,
+    } = useSWR(`${API_URL}/api/users/current`, fetcher);
 
   const [currentChatId, setCurrentChatId] = useState(1);
 
@@ -55,5 +56,5 @@ export default function ChatApp() {
     );
 
   if (isLoading) return <div>Loading..</div>;
-  if (error) return <div>You must login to access this page</div>;
+  if (error) return <div><a href="/" color="blue">You must login to access this page</a></div>;
 }
