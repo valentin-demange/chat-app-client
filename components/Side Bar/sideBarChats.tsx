@@ -5,6 +5,7 @@ import AvatarUser from "@/components/Others/avatarUser";
 import { UserContext } from "utils/context";
 import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
 import useSWR from "swr";
+import { NEXT_PUBLIC_API_URL } from "config";
 
 export default function SideBarChats() {
   const currentUser = useContext(UserContext);
@@ -19,7 +20,7 @@ export default function SideBarChats() {
       data: chatsList,
       error,
       isLoading,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/current/chats`, fetcher);
+    } = useSWR(`${NEXT_PUBLIC_API_URL}/api/users/current/chats`, fetcher);
 
   // const chatsList = [
   //   1,

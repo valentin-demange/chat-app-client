@@ -16,6 +16,7 @@ import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 import { ChatInfo } from "utils/customTypes";
 import useSWR from "swr";
+import { NEXT_PUBLIC_API_URL } from "config";
 
 export default function ChatHeader() {
   const currentUser = useContext(UserContext);
@@ -36,7 +37,7 @@ export default function ChatHeader() {
       data: chatInfo,
       error,
       isLoading,
-    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId.toString()}`, fetcher);
+    } = useSWR(`${NEXT_PUBLIC_API_URL}/api/chats/${chatId.toString()}`, fetcher);
 
 
   // const chatInfo = {

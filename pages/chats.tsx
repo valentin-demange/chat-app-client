@@ -34,7 +34,7 @@ export default function ChatApp() {
     //   data: currentUser,
     //   error,
     //   isLoading,
-    // } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/current`, fetcher);
+    // } = useSWR(`${NEXT_PUBLIC_API_URL}/api/users/current`, fetcher);
 
   const [currentChatId, setCurrentChatId] = useState(1);
 

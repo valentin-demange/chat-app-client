@@ -3,6 +3,7 @@ import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { ChatContext, SocketContext, UserContext } from "utils/context";
 import { Message } from "utils/customTypes";
+import { NEXT_PUBLIC_API_URL } from "config";
 
 export default function ChatBody() {
 
@@ -15,7 +16,7 @@ export default function ChatBody() {
   useEffect(() => {
     // Fetch the messages when the component mounts
     console.log(`Fetching messages of chat room n°${chatId}`);
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`, { credentials: "include" })
+    fetch(`${NEXT_PUBLIC_API_URL}/api/chats/${chatId}/messages`, { credentials: "include" })
       .then((res) => res.json())
       .then(setMessages);
 

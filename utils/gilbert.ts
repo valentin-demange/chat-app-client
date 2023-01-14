@@ -42,8 +42,8 @@ export async function checkGilbert(chatId: number): Promise<boolean> {
       throw new Error([res.statusText, message].join("\n"));
     }
     const chatInfo = await res.json();
+    console.log(chatInfo)
     if (chatInfo.membersUid) return true;
-    console.log(res);
   } catch (error: any) {
     alert(error.message);
   }
