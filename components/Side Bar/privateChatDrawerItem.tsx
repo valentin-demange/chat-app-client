@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import { UserContext, ChatContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
+import { User } from "utils/customTypes";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
   const currentUser = useContext(UserContext);
@@ -12,25 +13,29 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
   const handleOnClick = async () => {
     // e.preventDefault();
     // Add a new document with a generated id.
-    
-    const chatId = Math.random().toString(16).slice(2);
-    // await setDoc(doc(db, "chats", chatId), {
-    //   chatId: chatId,
-    //   lastMessage: null,
-    //   // currentUser must be placed first. Reason: We check the SECOND member of the chat as being Gilbert or not
-    //   membersUid: [currentUser!.uid, userUid], 
-    //   private: true,
-    // }).then(() => chatContext.setCurrentChat(chatId)); 
-    // await setDoc(doc(db, ["users", userUid, "chats"].join("/"), chatId), {
-    //   chatId: chatId,
-    // }); 
-    // await setDoc(doc(db, ["users", currentUser.id, "chats"].join("/"), chatId), {
-    //   chatId: chatId,
-    // });
-    handleCloseDrawer();
+  
+    try {
+      const res = await fetch("http://localhost:3000/api/chats/new", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: 'include',
+        body: JSON.stringify({
+          memberUserIds: [currentUser.id, userUid],
+        }),
+      });
+      if (!res.ok) {
+        const message = await res.text();
+        throw new Error([res.statusText, message].join("\n"));
+      }
+      const chat = await res.json();
+      console.log("Chat created with ID: ", chat.id);
+      // Emit the 'send message' event with the message and chatId as parameters
+      // socket.emit('send message', message, chatId);
+    } catch (error: any) {
+      alert(error.message);
+    }
 
-    // debugger
-    console.log("Chat created with ID: ", chatId);
+    handleCloseDrawer(); 
   };
 
 
@@ -42,9 +47,9 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
       minW="100%"
       onClick={handleOnClick}
     >
-      <AvatarUser uid={userUid} />
+      <AvatarUser userId={userUid} />
       <div className={styles.sbDrawerItemLabel}>
-        <TextUser uid={userUid} />
+        <TextUser userId={userUid} />
       </div>
     </Button>
   );

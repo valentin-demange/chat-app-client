@@ -28,7 +28,7 @@ export default function PrivateChatDrawer() {
     //   .filter((val) => val.uid !== currentUser.id)
     //   .map((val) => <PrivateChatDrawerItem key={val.uid} userUid={val.uid} handleCloseDrawer={onClose} />);
 
-    const uidToDisplay = [1, 2];
+    const uidToDisplay = [1];
     const listItems = uidToDisplay
       .filter((userId) => userId !== currentUser.id)
       .map((userId) => <PrivateChatDrawerItem key={userId} userUid={userId} handleCloseDrawer={onClose} />);

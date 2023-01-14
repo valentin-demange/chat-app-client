@@ -1,22 +1,36 @@
 import { Avatar } from "@chakra-ui/react";
 import React from "react";
+import { User } from "utils/customTypes";
+import useSWR from "swr";
 
-export default function AvatarUser({ uid } : {uid:number}) {
-  // const [userInfo, loading, error] = useDocumentData(doc(db, "users", uid), {
+export default function AvatarUser({ userId } : {userId:number}) {
+  // const [userInfo, loading, error] = useDocumentData(doc(db, "users", userId), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });
 
-  const userInfo = {
-    name: "Valentin",
-    photoURL: "",
-  }
+  const fetcher = (url: string): Promise<User> => {
+    return fetch(url, { credentials: "include" }).then((response) =>
+      response.json()
+    );
+  };
+
+  const {
+    data: userInfo,
+    error,
+    isLoading,
+  } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}`, fetcher);
+
+  // const userInfo = {
+  //   name: "Valentin",
+  //   photoURL: "",
+  // }
 
   if (userInfo) {
     return <div>
-      <Avatar name={userInfo.name} src={userInfo.photoURL} backgroundColor="gray.100"/>
+      <Avatar name={userInfo.firstName + " " + userInfo.lastName} src={userInfo.avatar} backgroundColor="gray.100"/>
     </div>;
   }
-  // if (loading) return <></>;
-  // if (error) return <div>Error</div>;
+  if (isLoading) return <></>;
+  if (error) return <div>Error</div>;
   return <></>;
 }

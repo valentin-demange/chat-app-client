@@ -21,6 +21,7 @@ export interface Message {
   }
 
   export interface ChatInfo {
+    id: number;
     type: string;
     membersUid: number[];
     name: string;

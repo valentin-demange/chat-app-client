@@ -40,6 +40,7 @@ export default function ChatApp() {
     id: 1,
     name: "Général",
     type: "public",
+    avatar: "",
   });
 
   if (currentUser)

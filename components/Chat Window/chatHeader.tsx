@@ -55,7 +55,7 @@ export default function ChatHeader() {
 
       const handleOnClick = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
-        chatContext.setCurrentChat("public");
+        // chatContext.setCurrentChat("public");
         // await deleteDoc(doc(db, ["users", currentUser.id, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
         // await deleteDoc(doc(db, "chats", chatInfo.chatId)); 
@@ -66,7 +66,7 @@ export default function ChatHeader() {
       <Box borderColor="gray.400" className={styles.chatHeader}>
         {/* AVATAR */}
         {chatInfo.type == 'private' ? (
-          <AvatarUser uid={memberUid} />
+          <AvatarUser userId={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}
@@ -77,7 +77,7 @@ export default function ChatHeader() {
         <div className={styles.chatHeaderLabel}>
           {/* CHAT NAME */}
           {chatInfo.type == 'private' ? (
-            <TextUser uid={memberUid} />
+            <TextUser userId={memberUid} />
           ) : (
             <Text fontSize="18px" fontWeight="normal">
               {chatInfo.name}

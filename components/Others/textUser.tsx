@@ -1,19 +1,32 @@
 import { Text } from "@chakra-ui/react";
 import React from "react";
+import { User } from "utils/customTypes";
+import useSWR from "swr";
 
-export default function TextUser({ uid } : {uid:number}) {
-  // const [userInfo, loading, error] = useDocumentData(doc(db, "users", uid), {
-  //   snapshotListenOptions: { includeMetadataChanges: true },
-  // });
+export default function TextUser({ userId } : {userId:number}) {
 
-  const userInfo = {
-    name: "user info"
-  }
+  const fetcher = (url: string): Promise<User> => {
+    return fetch(url, { credentials: "include" }).then((response) =>
+      response.json()
+    );
+  };
+
+  const {
+    data: userInfo,
+    error,
+    isLoading,
+  } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}`, fetcher);
+
+
+
+  // const userInfo = {
+  //   name: "user info"
+  // }
 
   if (userInfo) {
     return <div>
           <Text fontSize="18px" fontWeight="normal">
-            {userInfo.name}
+          {userInfo.firstName + " " + userInfo.lastName}
           </Text>
               </div>;
   }

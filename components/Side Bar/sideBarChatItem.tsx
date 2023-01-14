@@ -51,13 +51,13 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
         className={styles.sbItem}
         variant="ghost"
         padding={0}
-        // onClick={() => chatContext.setCurrentChat(chatInfo.chatId)}
-        onClick={onClick}
+        onClick={() => chatContext.setCurrentChat(chatInfo.id)}
+        // onClick={onClick}
       >
 
         {/* AVATAR */}
         {chatInfo.type == "private" ? (
-          <AvatarUser uid={memberUid} />
+          <AvatarUser userId={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}
@@ -68,7 +68,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
         <div className={styles.sbItemLabel}>
           {/* CHAT NAME */}
           {chatInfo.type == "private" ? (
-            <TextUser uid={memberUid} />
+            <TextUser userId={memberUid} />
           ) : (
             <Text fontSize="18px" fontWeight="normal">
               {chatInfo.name}
