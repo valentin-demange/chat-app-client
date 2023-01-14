@@ -4,8 +4,7 @@ import { ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext, ChatContext, SocketContext } from "utils/context";
-import askGilbert from "utils/askGilbert";
-import { checkGilbert, writeMessage } from "utils/chatsFunctions";
+import { askGilbert, checkGilbert } from "utils/gilbert";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
@@ -26,7 +25,8 @@ export default function ChatFooter() {
     setTextMessage("");
 
     await writeMessage(chatId, currentUser.id, textMessage)
-    // const isGilbert = await checkGilbert(chatContext.currentChat);
+    const isGilbert = await checkGilbert(chatId);
+    console.log(isGilbert)
     // if (isGilbert) {
     //   messageList = await getMessages();
     //   const answerGilbert = await askGilbert(chatGilbert, currentUser.firstName as string)

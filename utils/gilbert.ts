@@ -1,5 +1,5 @@
 
-export default async function askGilbert(chatGilbert: any, userName: string) {
+export async function askGilbert(chatGilbert: any, userName: string) {
   const response = await fetch("/api/askOpenAi", {
     method: "POST",
     headers: {
@@ -29,3 +29,21 @@ const formatGilbertPrompt = (chatGilbert: any, userName:string) => {
 
   return intro + body + outro;
 };
+
+export async function checkGilbert(chatId: number): Promise<boolean> {
+  try {
+    const res = await fetch("http://localhost:3000/api/chats/" + chatId, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+      credentials: 'include',
+    });
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error([res.statusText, message].join("\n"));
+    }
+    console.log(res);
+  } catch (error: any) {
+    alert(error.message);
+  }
+  return false
+}
