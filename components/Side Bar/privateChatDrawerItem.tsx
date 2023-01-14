@@ -9,6 +9,7 @@ import { User } from "utils/customTypes";
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
   const currentUser = useContext(UserContext);
   const socket = useContext(SocketContext);
+  const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
 
   const handleOnClick = async () => {
     // e.preventDefault();
@@ -30,6 +31,8 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
       }
       const chat = await res.json();
       console.log("Chat created with ID: ", chat.id);
+              // Go on created chat
+              setCurrentChatId(chat.id);
       // Emit the 'send message' event with the message and chatId as parameters
       // memberUserIds.map((userId:number) => socket.emit('new chat', userId, chat.id));
       // WARNING : THIS MUST BE CORRECTED, IT SHOULD EMIT SOCKET FOR ALL MEMBER USERS IN THE CHAT
