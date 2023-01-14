@@ -86,7 +86,7 @@ export default function ChatHeader() {
           )}
           <Text fontSize={13} fontWeight="normal" color="gray.400">
             {chatInfo.lastMessage
-              ? "Last message at " +
+              ? "Last message: " +
                 chatInfo.lastMessage
               : "No last message"}
           </Text>

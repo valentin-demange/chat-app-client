@@ -1,3 +1,4 @@
+import { GILBERT_USER_ID } from "config";
 
 export async function askGilbert(chatGilbert: any, userName: string) {
   const response = await fetch("/api/askOpenAi", {
@@ -42,8 +43,7 @@ export async function checkGilbert(chatId: number): Promise<boolean> {
       throw new Error([res.statusText, message].join("\n"));
     }
     const chatInfo = await res.json();
-    console.log(chatInfo)
-    if (chatInfo.membersUid) return true;
+    if (chatInfo.type == "private" && chatInfo.membersUid.includes(Number(GILBERT_USER_ID))) return true;
   } catch (error: any) {
     alert(error.message);
   }

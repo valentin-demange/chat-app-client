@@ -26,12 +26,10 @@ export default function ChatFooter() {
 
     await writeMessage(chatId, currentUser.id, textMessage)
     const isGilbert = await checkGilbert(chatId);
-    console.log(isGilbert)
-    // if (isGilbert) {
-    //   messageList = await getMessages();
-    //   const answerGilbert = await askGilbert(chatGilbert, currentUser.firstName as string)
-    //   await writeMessage(chatContext.currentChat, "1", answerGilbert)
-    // }
+    if (isGilbert) {
+      const answerGilbert = await askGilbert(chatId, currentUser.firstName as string)
+      await writeMessage(chatId, "1", answerGilbert)
+    }
   };
 
   const writeMessage = async (

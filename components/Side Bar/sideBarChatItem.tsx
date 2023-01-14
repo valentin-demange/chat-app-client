@@ -83,7 +83,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
             paddingTop="3px"
           >
             {chatInfo.lastMessage
-              ? "Last message at " +
+              ? "Last message: " +
                 chatInfo.lastMessage
               : "No last message"}
           </Text>
