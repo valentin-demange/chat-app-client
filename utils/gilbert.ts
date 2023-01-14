@@ -32,7 +32,7 @@ const formatGilbertPrompt = (chatGilbert: any, userName:string) => {
 
 export async function checkGilbert(chatId: number): Promise<boolean> {
   try {
-    const res = await fetch("http://localhost:3000/api/chats/" + chatId, {
+    const res = await fetch(`http://localhost:3000/api/chats/${chatId.toString()}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       credentials: 'include',
@@ -41,6 +41,8 @@ export async function checkGilbert(chatId: number): Promise<boolean> {
       const message = await res.text();
       throw new Error([res.statusText, message].join("\n"));
     }
+    const chatInfo = await res.json();
+    if (chatInfo.membersUid) return true;
     console.log(res);
   } catch (error: any) {
     alert(error.message);
