@@ -56,7 +56,7 @@ const formatGilbertPrompt = (messagesList: any, userName: string) => {
 export async function checkGilbert(chatId: number): Promise<boolean> {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/chats/${chatId.toString()}`,
+      `${API_URL}/api/chats/${chatId.toString()}`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },

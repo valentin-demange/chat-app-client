@@ -60,7 +60,7 @@ export default function ChatHeader() {
 
       try {
         const res = await fetch(
-          `http://localhost:3000/api/chats/${chatInfo.id.toString()}`,
+          `${API_URL}/api/chats/${chatInfo.id.toString()}`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },

@@ -11,6 +11,7 @@ import { Spacer } from "@chakra-ui/react";
 // import PasswordInput from "./formikInputs";
 import { Field, Form, Formik } from "formik";
 import { FormikInput, FormikPasswordInput } from "./formikInputs";
+import { API_URL } from "config";
 
 export default function ({ cb }: { cb: any }) {
   function validateInput(value: string) {
@@ -24,7 +25,7 @@ export default function ({ cb }: { cb: any }) {
   const handleSubmit = async (values: any, actions: any) => {
     // event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/users/sign-up", {
+      const res = await fetch(`${API_URL}/api/users/sign-up`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

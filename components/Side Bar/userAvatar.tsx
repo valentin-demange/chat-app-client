@@ -11,12 +11,13 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useContext } from 'react';
 import { UserContext } from 'utils/context';
 import router from "next/router";
+import { API_URL } from "config";
 
 
 const logout = async () => {
   
   try {
-    const res = await fetch("http://localhost:3000/api/users/logout", {
+    const res = await fetch(`${API_URL}/api/users/logout`, {
       method: "GET",
       credentials: 'include',
     });

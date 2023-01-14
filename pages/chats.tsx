@@ -12,7 +12,7 @@ import router from "next/router";
 import { API_URL, GENERAL_CHAT_ID } from "config";
 
 export default function ChatApp() {
-  const socket = io("http://localhost:3000", { transports: ["websocket"] });
+  const socket = io(`${API_URL}`, { transports: ["websocket"] });
 
 
     // const [currentUser, setCurrentUser] = useState({

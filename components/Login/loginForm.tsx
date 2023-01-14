@@ -7,6 +7,7 @@ import { Spacer } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { FormikInput, FormikPasswordInput } from "./formikInputs";
 import { useRouter } from "next/router";
+import { API_URL } from "config";
 
 export default function ({ cb }: { cb: any }) {
   function validateInput(value: string) {
@@ -22,7 +23,7 @@ export default function ({ cb }: { cb: any }) {
   const handleSubmit = async (values: any, actions: any) => {
     // event.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/users/login", {
+      const res = await fetch(`${API_URL}/api/users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),

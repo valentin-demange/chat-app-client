@@ -35,7 +35,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
 
   const onClick = async () => {
     // event.preventDefault();
-      const res = await fetch("http://localhost:3000/api/users/test", {
+      const res = await fetch(`${API_URL}/api/users/test`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',

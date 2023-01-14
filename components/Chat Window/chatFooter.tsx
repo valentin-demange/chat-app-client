@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext, ChatContext, SocketContext } from "utils/context";
 import { askGilbert, checkGilbert } from "utils/gilbert";
-import { GILBERT_USER_ID } from "config";
+import { API_URL, GILBERT_USER_ID } from "config";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
@@ -39,7 +39,7 @@ export default function ChatFooter() {
     textMessage: string
   ) => {
     try {
-      const res = await fetch("http://localhost:3000/api/messages/new", {
+      const res = await fetch(`${API_URL}/api/messages/new`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: 'include',
