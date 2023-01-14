@@ -2,7 +2,7 @@ import { Avatar } from "@chakra-ui/react";
 import React from "react";
 import { User } from "utils/customTypes";
 import useSWR from "swr";
-import { NEXT_PUBLIC_API_URL } from "config";
+import { API_URL } from "config";
 
 export default function AvatarUser({ userId } : {userId:number}) {
   // const [userInfo, loading, error] = useDocumentData(doc(db, "users", userId), {
@@ -19,7 +19,7 @@ export default function AvatarUser({ userId } : {userId:number}) {
     data: userInfo,
     error,
     isLoading,
-  } = useSWR(`${NEXT_PUBLIC_API_URL}/api/users/${userId}`, fetcher);
+  } = useSWR(`${API_URL}/api/users/${userId}`, fetcher);
 
   // const userInfo = {
   //   name: "Valentin",

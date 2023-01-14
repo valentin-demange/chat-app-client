@@ -6,7 +6,7 @@ import TextUser from "@/components/Others/textUser";
 import { UserContext, ChatContext } from "utils/context";
 import useSWR from "swr";
 import { ChatInfo } from "utils/customTypes";
-import { NEXT_PUBLIC_API_URL } from "config";
+import { API_URL } from "config";
 
 export default function SideBarChatItem({ chatId } : {chatId : number}) {
   const currentUser = useContext(UserContext);
@@ -22,7 +22,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
     data: chatInfo,
     error,
     isLoading,
-  } = useSWR(`${NEXT_PUBLIC_API_URL}/api/chats/${chatId}`, fetcher);
+  } = useSWR(`${API_URL}/api/chats/${chatId}`, fetcher);
 
   // const chatInfo = {
   //   type: "public",
