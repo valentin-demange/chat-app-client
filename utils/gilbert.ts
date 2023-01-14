@@ -1,29 +1,51 @@
-import { GILBERT_USER_ID } from "config";
+import { API_URL, GILBERT_USER_ID } from "config";
+import { Message } from "./customTypes";
 
-export async function askGilbert(chatGilbert: any, userName: string) {
-  const response = await fetch("/api/askOpenAi", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({promptOpenAi: formatGilbertPrompt(chatGilbert, userName),
-    userName: userName}),
-  });
-  const data = await response.json();
-  return data.result;
+export async function askGilbert(chatId: number, userName: string) {
+  try {
+    const res = await fetch(
+      `${API_URL}/api/chats/${chatId}/messages`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      }
+    );
+    if (!res.ok) {
+      const message = await res.text();
+      throw new Error([res.statusText, message].join("\n"));
+    }
+    const messagesList = await res.json();
+
+    const response = await fetch("/api/askOpenAi", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        promptOpenAi: formatGilbertPrompt(messagesList, userName),
+        userName: userName,
+      }),
+    });
+    const data = await response.json();
+    return data.result;
+  } catch (error: any) {
+    alert(error.message);
+  }
+  return null;
 }
 
-const formatGilbertPrompt = (chatGilbert: any, userName:string) => {
+const formatGilbertPrompt = (messagesList: any, userName: string) => {
   const intro = `The following is a conversation between ${userName} and Gilbert. 
   Gilbert is helpful, creative, clever, and very friendly. 
   Gilbert try to convince people to hire Valentin as a front-end developer for a tech company. 
   Valentin is passionate about functional programming and web technologies in general, he loves React and Next js.\n
   \n`;
 
-  const body = chatGilbert
-    .map((msg: { authorId: string; text: string; }) => {
-      if (msg.authorId === "Gilbert") return `Gilbert:` + msg.text;
-      else return `${userName}: ` + msg.text;
+  const body = messagesList
+    .map((msg: Message) => {
+      if (msg.userId === Number(GILBERT_USER_ID)) return `Gilbert:` + msg.message;
+      else return `${userName}: ` + msg.message;
     })
     .join("\n");
   const outro = "\nGilbert:";
@@ -33,19 +55,26 @@ const formatGilbertPrompt = (chatGilbert: any, userName:string) => {
 
 export async function checkGilbert(chatId: number): Promise<boolean> {
   try {
-    const res = await fetch(`http://localhost:3000/api/chats/${chatId.toString()}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      credentials: 'include',
-    });
+    const res = await fetch(
+      `http://localhost:3000/api/chats/${chatId.toString()}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      }
+    );
     if (!res.ok) {
       const message = await res.text();
       throw new Error([res.statusText, message].join("\n"));
     }
     const chatInfo = await res.json();
-    if (chatInfo.type == "private" && chatInfo.membersUid.includes(Number(GILBERT_USER_ID))) return true;
+    if (
+      chatInfo.type == "private" &&
+      chatInfo.membersUid.includes(Number(GILBERT_USER_ID))
+    )
+      return true;
   } catch (error: any) {
     alert(error.message);
   }
-  return false
+  return false;
 }

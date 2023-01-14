@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { UserContext, ChatContext, SocketContext } from "utils/context";
 import { askGilbert, checkGilbert } from "utils/gilbert";
+import { GILBERT_USER_ID } from "config";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
@@ -27,8 +28,8 @@ export default function ChatFooter() {
     await writeMessage(chatId, currentUser.id, textMessage)
     const isGilbert = await checkGilbert(chatId);
     if (isGilbert) {
-      const answerGilbert = await askGilbert(chatId, currentUser.firstName as string)
-      await writeMessage(chatId, "1", answerGilbert)
+      const answerGilbert = await askGilbert(chatId, currentUser.firstName)
+      await writeMessage(chatId, Number(GILBERT_USER_ID), answerGilbert)
     }
   };
 
