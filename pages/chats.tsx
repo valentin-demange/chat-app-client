@@ -9,7 +9,7 @@ import { Message, User } from "utils/customTypes";
 import useSWR from "swr";
 import Router from "next/router";
 import router from "next/router";
-import { API_URL } from "config";
+import { API_URL, GENERAL_CHAT_ID } from "config";
 
 export default function ChatApp() {
   const socket = io("http://localhost:3000", { transports: ["websocket"] });
@@ -37,7 +37,7 @@ export default function ChatApp() {
       isLoading,
     } = useSWR(`${API_URL}/api/users/current`, fetcher);
 
-  const [currentChatId, setCurrentChatId] = useState(1);
+  const [currentChatId, setCurrentChatId] = useState(Number(GENERAL_CHAT_ID));
 
   if (currentUser)
     return (

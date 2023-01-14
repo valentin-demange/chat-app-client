@@ -32,6 +32,7 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
       console.log("Chat created with ID: ", chat.id);
       // Emit the 'send message' event with the message and chatId as parameters
       // memberUserIds.map((userId:number) => socket.emit('new chat', userId, chat.id));
+      // WARNING : THIS MUST BE CORRECTED, IT SHOULD EMIT SOCKET FOR ALL MEMBER USERS IN THE CHAT
       socket.emit('new chat', currentUser.id, chat.id)
     } catch (error: any) {
       alert(error.message);

@@ -11,34 +11,35 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
-import { ChatContext, UserContext } from "utils/context";
+import { ChatContext, SocketContext, UserContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 import { ChatInfo } from "utils/customTypes";
 import useSWR from "swr";
-import { API_URL } from "config";
+import { API_URL, GENERAL_CHAT_ID } from "config";
 
 export default function ChatHeader() {
   const currentUser = useContext(UserContext);
   const chatId = useContext(ChatContext).currentChatId;
+  const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
+  const socket = useContext(SocketContext);
 
   // const [chatInfo, loading, error] = useDocumentData(
   //   doc(db, "chats", currentChat),
   //   { snapshotListenOptions: { includeMetadataChanges: true } }
   // );
 
-      const fetcher = (url: string): Promise<ChatInfo> => {
-      return fetch(url, { credentials: "include" }).then((response) =>
-        response.json()
-      );
-    };
-  
-    const {
-      data: chatInfo,
-      error,
-      isLoading,
-    } = useSWR(`${API_URL}/api/chats/${chatId.toString()}`, fetcher);
+  const fetcher = (url: string): Promise<ChatInfo> => {
+    return fetch(url, { credentials: "include" }).then((response) =>
+      response.json()
+    );
+  };
 
+  const {
+    data: chatInfo,
+    error,
+    isLoading,
+  } = useSWR(`${API_URL}/api/chats/${chatId.toString()}`, fetcher);
 
   // const chatInfo = {
   //   type: "public",
@@ -49,24 +50,43 @@ export default function ChatHeader() {
   // }
 
   if (chatInfo) {
-  
-    const memberUid = chatInfo.type == 'private'
-      ? chatInfo.membersUid.filter((uid : number) => currentUser.id !== uid)[0]
-      : 0;
+    const memberUid =
+      chatInfo.type == "private"
+        ? chatInfo.membersUid.filter((uid: number) => currentUser.id !== uid)[0]
+        : 0;
 
-      const handleOnClick = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        // chatContext.setCurrentChat("public");
-        // await deleteDoc(doc(db, ["users", currentUser.id, "chats", chatInfo.chatId].join("/"))); 
-        // await deleteDoc(doc(db, ["users", memberUid, "chats", chatInfo.chatId].join("/"))); 
-        // await deleteDoc(doc(db, "chats", chatInfo.chatId)); 
-        // console.log("Chat ID ", chatInfo.chatId, "has been deleted");
-      };
-        
-      return (
+    const handleOnClick = async (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/chats/${chatInfo.id.toString()}`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+          }
+        );
+        if (!res.ok) {
+          const message = await res.text();
+          throw new Error([res.statusText, message].join("\n"));
+        }
+        const message = await res.text();
+        console.log(message);
+        // Go back on general chat
+        setCurrentChatId(Number(GENERAL_CHAT_ID));
+        // Socket delete chat
+        // WARNING : THIS MUST BE CORRECTED, IT SHOULD EMIT SOCKET FOR ALL MEMBER USERS IN THE CHAT
+        socket.emit("delete chat", currentUser.id, chatInfo.id);
+      } catch (error: any) {
+        alert(error.message);
+      }
+    };
+
+    return (
       <Box borderColor="gray.400" className={styles.chatHeader}>
         {/* AVATAR */}
-        {chatInfo.type == 'private' ? (
+        {chatInfo.type == "private" ? (
           <AvatarUser userId={memberUid} />
         ) : (
           <Avatar
@@ -77,7 +97,7 @@ export default function ChatHeader() {
         )}
         <div className={styles.chatHeaderLabel}>
           {/* CHAT NAME */}
-          {chatInfo.type == 'private' ? (
+          {chatInfo.type == "private" ? (
             <TextUser userId={memberUid} />
           ) : (
             <Text fontSize="18px" fontWeight="normal">
@@ -86,8 +106,7 @@ export default function ChatHeader() {
           )}
           <Text fontSize={13} fontWeight="normal" color="gray.400">
             {chatInfo.lastMessage
-              ? "Last message: " +
-                chatInfo.lastMessage
+              ? "Last message: " + chatInfo.lastMessage
               : "No last message"}
           </Text>
         </div>
@@ -102,7 +121,19 @@ export default function ChatHeader() {
             fontSize={20}
           />
           <MenuList>
-            {chatInfo.type == 'private' ? <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} onClick={handleOnClick} /> : <MenuItem icon={<ExternalLinkIcon />} children={"Leave"} isDisabled />}
+            {chatInfo.type == "private" ? (
+              <MenuItem
+                icon={<ExternalLinkIcon />}
+                children={"Leave"}
+                onClick={handleOnClick}
+              />
+            ) : (
+              <MenuItem
+                icon={<ExternalLinkIcon />}
+                children={"Leave"}
+                isDisabled
+              />
+            )}
           </MenuList>
         </Menu>
       </Box>
@@ -110,5 +141,5 @@ export default function ChatHeader() {
   }
   if (isLoading) return <></>;
   if (error) return <div>Error</div>;
-  return <></>
+  return <></>;
 }

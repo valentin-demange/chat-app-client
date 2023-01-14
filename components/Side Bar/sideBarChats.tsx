@@ -54,6 +54,9 @@ export default function SideBarChats() {
     socket.on("new chat", (chatId: number) => {
       setChatsList((prevChatsList) => [...prevChatsList, chatId]);
     });
+    socket.on("delete chat", (chatId: number) => {
+      setChatsList((prevChatsList) => prevChatsList.filter((id) => id !== chatId));
+    });
   }, [currentUserId]);
 
 
