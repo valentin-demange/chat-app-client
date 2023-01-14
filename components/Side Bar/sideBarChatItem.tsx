@@ -4,23 +4,33 @@ import React, { useContext } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 import { UserContext, ChatContext } from "utils/context";
+import useSWR from "swr";
+import { ChatInfo } from "utils/customTypes";
 
-export default function SideBarChatItem({ chatId } : {chatId : string}) {
+export default function SideBarChatItem({ chatId } : {chatId : number}) {
   const currentUser = useContext(UserContext);
   const chatContext = useContext(ChatContext);
 
-  // const [chatInfo, loading, error] = useDocumentData(doc(db, "chats", chatId), {
-  //   snapshotListenOptions: { includeMetadataChanges: true },
-  // });
+  const fetcher = (url: string): Promise<ChatInfo> => {
+    return fetch(url, { credentials: "include" }).then((response) =>
+      response.json()
+    );
+  };
 
-  const chatInfo = {
-    private: false,
-    membersUid: ["General"],
-    name: "General",
-    avatarPic: "",
-    lastMessage: 0,
-    chatId: "1",
-  }
+  const {
+    data: chatInfo,
+    error,
+    isLoading,
+  } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/chats/${chatId}`, fetcher);
+
+  // const chatInfo = {
+  //   type: "public",
+  //   membersUid: [1],
+  //   name: "General",
+  //   avatarPic: "",
+  //   lastMessage: 0,
+  //   chatId: 1,
+  // }
 
   const onClick = async () => {
     // event.preventDefault();
@@ -35,9 +45,7 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
 
 
   if (chatInfo) {
-    const memberUid = chatInfo.private
-      ? chatInfo.membersUid.filter((uid : string) => currentUser.id !== uid)[0]
-      : "General";
+    const memberUid = chatInfo.membersUid.filter((uid : number) => currentUser.id !== uid)[0];
     return (
       <Button
         className={styles.sbItem}
@@ -48,18 +56,18 @@ export default function SideBarChatItem({ chatId } : {chatId : string}) {
       >
 
         {/* AVATAR */}
-        {chatInfo.private ? (
+        {chatInfo.type == "private" ? (
           <AvatarUser uid={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}
             backgroundColor="gray.200"
-            src={chatInfo.avatarPic}
+            src={chatInfo.avatar}
           />
         )}
         <div className={styles.sbItemLabel}>
           {/* CHAT NAME */}
-          {chatInfo.private ? (
+          {chatInfo.type == "private" ? (
             <TextUser uid={memberUid} />
           ) : (
             <Text fontSize="18px" fontWeight="normal">

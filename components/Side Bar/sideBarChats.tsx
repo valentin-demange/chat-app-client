@@ -4,22 +4,31 @@ import React, { useContext } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
 import { UserContext } from "utils/context";
 import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
+import useSWR from "swr";
 
 export default function SideBarChats() {
   const currentUser = useContext(UserContext);
-  // const [value, loading, error] = useCollectionData(
-  //   collection(db, ["users", currentUser.id, "chats"].join("/")),
-  //   {
-  //     snapshotListenOptions: { includeMetadataChanges: true },
-  //   }
-  // );
-  const value = [
-    {chatId: "1"}
-  ];
 
-  if (value) {
-    const listItem = value.map((val) => (
-          <SideBarChatItem key={val.chatId} chatId={val.chatId} />
+    const fetcher = (url: string): Promise<number[]> => {
+      return fetch(url, { credentials: "include" }).then((response) =>
+        response.json()
+      );
+    };
+  
+    const {
+      data: chatsList,
+      error,
+      isLoading,
+    } = useSWR(`${process.env.NEXT_PUBLIC_API_URL}/api/users/current/chats`, fetcher);
+
+  // const chatsList = [
+  //   1,
+  //   12
+  // ];
+
+  if (chatsList) {
+    const listItem = chatsList.map((chatId) => (
+          <SideBarChatItem key={chatId} chatId={chatId} />
         ));
     return <Box className={styles.sbItemsContainer}>{listItem}</Box>;
   }
