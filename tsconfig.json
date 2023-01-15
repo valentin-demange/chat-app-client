@@ -31,7 +31,7 @@
       ]
     }
   },
-  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "pages/Test.jss", "components/Login/currentUser.jsx", "components/Login/currentUser.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.js", "components/firebaseLogin.old", "pages/test.jsx", "components/Chat Window/chatHeader.jsx", "components/Side Bar/sideBarChats.jsx", "components/Chat Window/chatBody.jsx", "components/Login/firebaseAuth.jsx", "compon, "components/Side Bar/sideBarChatItem.jsx"ents/Others/textUser.jsx", "components/Others/avatarUser.jsx", "components/Side Bar/privateChatDrawer.jsx"],
+  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types.d.ts", "pages/Test.jss", "components/Login/currentUser.jsx", "components/Login/currentUser.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseAuth.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.jsx", "components/firebaseLogin.js", "components/firebaseLogin.old", "pages/test.jsx", "components/Chat Window/chatHeader.jsx", "components/Side Bar/sideBarChats.jsx", "components/Chat Window/chatBody.jsx", "components/Login/firebaseAuth.jsx", "compon, "components/Side Bar/sideBarChatItem.jsx"ents/Others/textUser.jsx", "components/Others/chatAvatar.jsx", "components/Side Bar/privateChatDrawer.jsx"],
   "exclude": [
     "node_modules"
   ],

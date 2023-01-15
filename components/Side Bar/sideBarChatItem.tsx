@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import AvatarUser from "@/components/Others/avatarUser";
+import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { LoginContext, ChatContext } from "utils/context";
 import useSWR from "swr";
@@ -51,7 +51,7 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
 
         {/* AVATAR */}
         {chatInfo.type == "private" ? (
-          <AvatarUser userId={memberUid} />
+          <ChatAvatar userId={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}

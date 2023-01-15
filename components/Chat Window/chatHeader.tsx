@@ -12,7 +12,7 @@ import {
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
 import { ChatContext, SocketContext, LoginContext } from "utils/context";
-import AvatarUser from "@/components/Others/avatarUser";
+import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { ChatInfo } from "utils/customTypes";
 import useSWR from "swr";
@@ -92,7 +92,7 @@ export default function ChatHeader() {
       <Box borderColor="gray.400" className={styles.chatHeader}>
         {/* AVATAR */}
         {chatInfo.type == "private" ? (
-          <AvatarUser userId={memberUid} />
+          <ChatAvatar userId={memberUid} />
         ) : (
           <Avatar
             name={chatInfo.name}

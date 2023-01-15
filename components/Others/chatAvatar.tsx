@@ -4,7 +4,7 @@ import { User } from "utils/customTypes";
 import useSWR from "swr";
 import { API_URL } from "config";
 
-export default function AvatarUser({ userId } : {userId:number}) {
+export default function ChatAvatar({ userId } : {userId:number}) {
   // const [userInfo, loading, error] = useDocumentData(doc(db, "users", userId), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });

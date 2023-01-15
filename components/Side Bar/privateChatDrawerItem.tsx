@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Button, Avatar, Text } from "@chakra-ui/react";
 import styles from "./styles.module.css";
 import { LoginContext, ChatContext, SocketContext } from "utils/context";
-import AvatarUser from "@/components/Others/avatarUser";
+import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { User } from "utils/customTypes";
 import { API_URL } from "config";
@@ -56,7 +56,7 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
       minW="100%"
       onClick={handleOnClick}
     >
-      <AvatarUser userId={userUid} />
+      <ChatAvatar userId={userUid} />
       <div className={styles.sbDrawerItemLabel}>
         <TextUser userId={userUid} />
       </div>

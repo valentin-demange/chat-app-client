@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-import AvatarUser from "@/components/Others/avatarUser";
+import ChatAvatar from "@/components/Others/chatAvatar";
 import { SocketContext, LoginContext } from "utils/context";
 import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
 import useSWR from "swr";
