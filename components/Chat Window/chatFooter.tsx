@@ -59,7 +59,7 @@ export default function ChatFooter() {
       const message = await res.json();
       // Emit the 'send message' event with the message and chatId as parameters
       socket.emit('send message', message, chatId);
-      socket.emit('update timestamp', userId, message.createdAt);
+      // socket.emit('update timestamp', userId, message.createdAt);
     } catch (error: any) {
       alert(error.message);
     }
