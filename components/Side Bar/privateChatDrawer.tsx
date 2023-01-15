@@ -10,12 +10,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { UserContext } from "utils/context";
+import { LoginContext } from "utils/context";
 import PrivateChatDrawerItem from "./privateChatDrawerItem";
 
 export default function PrivateChatDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(LoginContext);
   // const [value, loading, error] = useCollectionData(collection(db, "users"), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });

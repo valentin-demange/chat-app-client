@@ -3,14 +3,14 @@ import { Box, IconButton, Input } from "@chakra-ui/react";
 import { ArrowRightIcon } from "@chakra-ui/icons";
 import React, { useState } from "react";
 import { useContext } from "react";
-import { UserContext, ChatContext, SocketContext } from "utils/context";
+import { LoginContext, ChatContext, SocketContext } from "utils/context";
 import { askGilbert, checkGilbert } from "utils/gilbert";
 import { API_URL, GILBERT_USER_ID } from "config";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
   const chatId = useContext(ChatContext).currentChatId;
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
   const socket = useContext(SocketContext);
 
 

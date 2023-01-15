@@ -2,7 +2,7 @@ import styles from "./chats.module.css";
 import SideBar from "@/components/Side Bar/main";
 import ChatWindow from "@/components/Chat Window/main";
 import React, { useEffect, useState } from "react";
-import { UserContext, ChatContext } from "utils/context";
+import { LoginContext, ChatContext } from "utils/context";
 import { io } from "socket.io-client";
 import { SocketContext } from "utils/context";
 import { Message, User } from "utils/customTypes";
@@ -41,7 +41,7 @@ export default function ChatApp() {
   if (loginData.user)
     return (
       <div className={styles.container}>
-        <UserContext.Provider value={loginData}>
+        <LoginContext.Provider value={loginData}>
           <ChatContext.Provider
             value={{ currentChatId: currentChatId, setCurrentChatId: setCurrentChatId }}
           >
@@ -50,7 +50,7 @@ export default function ChatApp() {
               <ChatWindow />
             </SocketContext.Provider>
           </ChatContext.Provider>
-        </UserContext.Provider>
+        </LoginContext.Provider>
       </div>
     );
 

@@ -3,13 +3,13 @@ import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
-import { UserContext, ChatContext } from "utils/context";
+import { LoginContext, ChatContext } from "utils/context";
 import useSWR from "swr";
 import { ChatInfo } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function SideBarChatItem({ chatId } : {chatId : number}) {
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
   const chatContext = useContext(ChatContext);
 
   const fetcher = (url: string): Promise<ChatInfo> => {

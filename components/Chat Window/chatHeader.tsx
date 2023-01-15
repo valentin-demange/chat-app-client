@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, ExternalLinkIcon } from "@chakra-ui/icons";
 import React, { useContext } from "react";
-import { ChatContext, SocketContext, UserContext } from "utils/context";
+import { ChatContext, SocketContext, LoginContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 import { ChatInfo } from "utils/customTypes";
@@ -19,7 +19,7 @@ import useSWR from "swr";
 import { API_URL, GENERAL_CHAT_ID } from "config";
 
 export default function ChatHeader() {
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
   const chatId = useContext(ChatContext).currentChatId;
   const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
   const socket = useContext(SocketContext);

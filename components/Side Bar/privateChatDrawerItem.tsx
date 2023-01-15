@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Button, Avatar, Text } from "@chakra-ui/react";
 import styles from "./styles.module.css";
-import { UserContext, ChatContext, SocketContext } from "utils/context";
+import { LoginContext, ChatContext, SocketContext } from "utils/context";
 import AvatarUser from "@/components/Others/avatarUser";
 import TextUser from "@/components/Others/textUser";
 import { User } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
   const socket = useContext(SocketContext);
   const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
 

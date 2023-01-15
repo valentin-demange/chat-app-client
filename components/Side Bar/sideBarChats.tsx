@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { Box, Avatar, Button, Text } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import AvatarUser from "@/components/Others/avatarUser";
-import { SocketContext, UserContext } from "utils/context";
+import { SocketContext, LoginContext } from "utils/context";
 import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
 import useSWR from "swr";
 import { API_URL } from "config";
@@ -10,7 +10,7 @@ import { API_URL } from "config";
 export default function SideBarChats() {
   const socket = useContext(SocketContext);
   const [chatsList, setChatsList] = useState([] as number[]);
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
 
   // const fetcher = (url: string): Promise<number[]> => {
   //   return fetch(url, {

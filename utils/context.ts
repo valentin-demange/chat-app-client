@@ -6,12 +6,12 @@ interface ChatContext {
     setCurrentChatId: any;
   }
 
-  interface UserContext {
+  interface LoginContext {
     user: User;
     token: string;
   }
 
-export const UserContext = createContext({} as UserContext)
+export const LoginContext = createContext({} as LoginContext)
 export const ChatContext = createContext({} as ChatContext)
 export const SocketContext = createContext({} as any)
 

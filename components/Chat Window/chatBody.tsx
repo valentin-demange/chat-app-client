@@ -1,12 +1,12 @@
 import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
-import { ChatContext, SocketContext, UserContext } from "utils/context";
+import { ChatContext, SocketContext, LoginContext } from "utils/context";
 import { Message } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function ChatBody() {
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
   const [messages, setMessages] = useState([] as Message[]);
   const socket = useContext(SocketContext);
   const chatId = useContext(ChatContext).currentChatId;

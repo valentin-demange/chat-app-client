@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useContext } from 'react';
-import { UserContext } from 'utils/context';
+import { LoginContext } from 'utils/context';
 import router from "next/router";
 import { API_URL } from "config";
 
@@ -38,7 +38,7 @@ const logout = async () => {
 };
 
 export default function UserAvatar() {
-  const currentUser = useContext(UserContext).user;
+  const currentUser = useContext(LoginContext).user;
 
     return (
       <Menu>
