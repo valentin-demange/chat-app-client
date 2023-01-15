@@ -16,7 +16,7 @@ import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { ChatInfo } from "utils/types";
 import useSWR from "swr";
-import { API_URL, GENERAL_CHAT_ID } from "config";
+import { API_URL, GENERAL_CHAT_ID } from "utils/constants";
 
 export default function ChatHeader() {
   const currentUser = useContext(LoginContext).user;

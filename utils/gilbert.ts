@@ -1,4 +1,4 @@
-import { API_URL, GILBERT_USER_ID } from "config";
+import { API_URL, GILBERT_USER_ID } from "utils/constants";
 import { Message } from "./types";
 
 export async function askGilbert(chatId: number, userName: string) {

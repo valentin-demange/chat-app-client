@@ -7,7 +7,7 @@ import { Spacer } from "@chakra-ui/react";
 import { Field, Form, Formik } from "formik";
 import { FormikInput, FormikPasswordInput } from "./formikInputs";
 import { useRouter } from "next/router";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function ({ cb }: { cb: any }) {
   function validateInput(value: string) {

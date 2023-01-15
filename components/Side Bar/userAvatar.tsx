@@ -11,7 +11,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import { useContext } from 'react';
 import { LoginContext } from 'utils/context';
 import router from "next/router";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 
 const logout = async () => {

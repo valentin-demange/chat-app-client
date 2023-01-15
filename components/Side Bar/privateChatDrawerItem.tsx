@@ -5,7 +5,7 @@ import { LoginContext, ChatContext, SocketContext } from "utils/context";
 import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { User } from "utils/types";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
   const currentUser = useContext(LoginContext).user;

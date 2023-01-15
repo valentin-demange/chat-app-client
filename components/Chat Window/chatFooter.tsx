@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { LoginContext, ChatContext, SocketContext } from "utils/context";
 import { askGilbert, checkGilbert, delay } from "utils/gilbert";
-import { API_URL, GILBERT_USER_ID } from "config";
+import { API_URL, GILBERT_USER_ID } from "utils/constants";
 
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");

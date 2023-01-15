@@ -3,7 +3,7 @@ import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { ChatContext, SocketContext, LoginContext } from "utils/context";
 import { Message } from "utils/types";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function ChatBody() {
   const currentUser = useContext(LoginContext).user;

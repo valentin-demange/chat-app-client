@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { SocketContext, LoginContext } from "utils/context";
 import SideBarChatItem from "@/components/Side Bar/sideBarChatItem";
 import useSWR from "swr";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function SideBarChats() {
   const socket = useContext(SocketContext);

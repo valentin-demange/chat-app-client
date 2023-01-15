@@ -6,7 +6,7 @@ import TextUser from "@/components/Others/textUser";
 import { LoginContext, ChatContext } from "utils/context";
 import useSWR from "swr";
 import { ChatInfo } from "utils/types";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function SideBarChatItem({ chatId } : {chatId : number}) {
   const currentUser = useContext(LoginContext).user;

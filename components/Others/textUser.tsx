@@ -2,7 +2,7 @@ import { Text } from "@chakra-ui/react";
 import React from "react";
 import { User } from "utils/types";
 import useSWR from "swr";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function TextUser({ userId } : {userId:number}) {
 

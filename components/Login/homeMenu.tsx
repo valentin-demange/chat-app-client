@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Box, Button } from "@chakra-ui/react";
-import { API_URL } from "config";
+import { API_URL } from "utils/constants";
 
 export default function ({ cb }: { cb: any }) {
   const onClick = async (values: any, actions: any) => {

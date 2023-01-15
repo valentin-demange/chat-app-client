@@ -9,7 +9,7 @@ import { Message, User } from "utils/types";
 import useSWR from "swr";
 import Router from "next/router";
 import router from "next/router";
-import { API_URL, GENERAL_CHAT_ID } from "config";
+import { API_URL, GENERAL_CHAT_ID } from "utils/constants";
 
 export default function ChatApp() {
   const socket = io(`${API_URL}`, { transports: ["websocket"] });
