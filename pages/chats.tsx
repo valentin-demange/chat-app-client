@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { LoginContext, ChatContext } from "utils/context";
 import { io } from "socket.io-client";
 import { SocketContext } from "utils/context";
-import { Message, User } from "utils/customTypes";
+import { Message, User } from "utils/types";
 import useSWR from "swr";
 import Router from "next/router";
 import router from "next/router";

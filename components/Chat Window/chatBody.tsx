@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { Avatar, Box, Tag } from "@chakra-ui/react";
 import React, { useContext, useEffect, useState } from "react";
 import { ChatContext, SocketContext, LoginContext } from "utils/context";
-import { Message } from "utils/customTypes";
+import { Message } from "utils/types";
 import { API_URL } from "config";
 
 export default function ChatBody() {

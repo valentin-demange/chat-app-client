@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import React from "react";
-import { User } from "utils/customTypes";
+import { User } from "utils/types";
 import useSWR from "swr";
 import { API_URL } from "config";
 

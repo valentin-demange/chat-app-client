@@ -5,7 +5,7 @@ import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
 import { LoginContext, ChatContext } from "utils/context";
 import useSWR from "swr";
-import { ChatInfo } from "utils/customTypes";
+import { ChatInfo } from "utils/types";
 import { API_URL } from "config";
 
 export default function SideBarChatItem({ chatId } : {chatId : number}) {

@@ -14,7 +14,7 @@ import React, { useContext } from "react";
 import { ChatContext, SocketContext, LoginContext } from "utils/context";
 import ChatAvatar from "@/components/Others/chatAvatar";
 import TextUser from "@/components/Others/textUser";
-import { ChatInfo } from "utils/customTypes";
+import { ChatInfo } from "utils/types";
 import useSWR from "swr";
 import { API_URL, GENERAL_CHAT_ID } from "config";
 

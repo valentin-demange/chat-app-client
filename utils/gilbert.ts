@@ -1,5 +1,5 @@
 import { API_URL, GILBERT_USER_ID } from "config";
-import { Message } from "./customTypes";
+import { Message } from "./types";
 
 export async function askGilbert(chatId: number, userName: string) {
   try {
