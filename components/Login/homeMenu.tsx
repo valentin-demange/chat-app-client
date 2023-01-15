@@ -21,6 +21,7 @@ export default function ({ cb }: { cb: any }) {
         throw new Error([res.statusText, message].join("\n"));
       }
       const result = await res.json();
+      alert(JSON.stringify(result))
       // Navigate to the /chats route using the Router object
     } catch (error: any) {
       alert(error.message);
@@ -49,15 +50,17 @@ export default function ({ cb }: { cb: any }) {
           Log in
         </Button>
       </div>
-      <div>
-        <Button
-          className={styles.homeButton}
-          colorScheme="green"
-          onClick={onClick as any}
-        >
-          Test
-        </Button>
-      </div>
+      {process.env.NEXT_PUBLIC_ENV == "dev" ? (
+        <div>
+          <Button
+            className={styles.homeButton}
+            colorScheme="green"
+            onClick={onClick as any}
+          >
+            Test
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 }
