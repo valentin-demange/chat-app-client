@@ -48,7 +48,7 @@ export default function ChatBody() {
       ) : (
         <MessageOther
           key={msg.id}
-          profilePicUrl={""}
+          profilePicUrl={msg.user.avatar}
           text={msg.message}
         ></MessageOther>
       )
