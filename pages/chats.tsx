@@ -31,9 +31,7 @@ export default function ChatApp() {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token)
     const user = JSON.parse(localStorage.getItem("user") as string);
-    console.log(user)
     setloginData({
       token: token,
       user: user,
