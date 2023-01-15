@@ -36,6 +36,10 @@ export default function ChatApp() {
       token: token,
       user: user,
     });
+    if (!user) {
+      alert("You must login to access this page")
+      router.push('/')
+    }
   }, []);
   
   if (loginData.user)
@@ -54,7 +58,7 @@ export default function ChatApp() {
       </div>
     );
 
-return <div><a href="/" color="blue">You must login to access this page</a></div>
+return <div>Loading..</div>
   // if (isLoading) return <div>Loading..</div>;
   // if (error) return <div><a href="/" color="blue">You must login to access this page</a></div>;
 
