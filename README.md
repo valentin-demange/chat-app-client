@@ -1,14 +1,32 @@
-# Chat App
+[Live Demo](https://blabla-19-90.vercel.app/) :point_left:
 
-## Work in progress 🚧
+[API Repository](https://github.com/valentin-demange/chat-app-api)
 
-The objective is to start from [chat-app-firebase](https://github.com/valentin-demange/chat-app-firebase) and replace firebase BaaS with an express backend (PERN stack)
+# Chat App Client
 
-This repository will contain the React client only. For the API part, click [here](https://github.com/valentin-demange/chat-app-api)
+### Features
 
-Architectural choices:
+- Mail / Password authentication
+- Toggle dark / light theme
+- Responsive design
+- Public & Private chats
+- Gilbert bot (GPT-3)
 
-- Database: Postgresql, hosted on [Heroku](https://www.heroku.com/)
-- ORM: [Prisma](https://www.prisma.io/)
-- Web socket: [ws](https://www.npmjs.com/package/ws)
+### Built with
 
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [Firebase](https://firebase.google.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Chakra-UI](https://chakra-ui.com/)
+- [OpenAi API](https://beta.openai.com/)
+
+### Inspired by
+
+- [The Odin Project](https://www.theodinproject.com)
+- [Michal Osman's project](https://github.com/michalosman/chat-app)
+- [Messenger](https://messenger.com)
+
+### To be implemented
+
+- Add dynamic timestamps
