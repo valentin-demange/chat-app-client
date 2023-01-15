@@ -15,7 +15,7 @@ import PrivateChatDrawerItem from "./privateChatDrawerItem";
 
 export default function PrivateChatDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const currentUser = useContext(LoginContext);
+  const currentUser = useContext(LoginContext).user;
   // const [value, loading, error] = useCollectionData(collection(db, "users"), {
   //   snapshotListenOptions: { includeMetadataChanges: true },
   // });
