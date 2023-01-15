@@ -10,7 +10,7 @@ import { API_URL, GILBERT_USER_ID } from "config";
 export default function ChatFooter() {
   const [textMessage, setTextMessage] = useState("");
   const chatId = useContext(ChatContext).currentChatId;
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
   const socket = useContext(SocketContext);
 
 
@@ -41,8 +41,10 @@ export default function ChatFooter() {
     try {
       const res = await fetch(`${API_URL}/api/messages/new`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           chatId: chatId,
           userId: userId,

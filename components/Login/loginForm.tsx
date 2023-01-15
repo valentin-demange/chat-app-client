@@ -27,12 +27,17 @@ export default function ({ cb }: { cb: any }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
-        credentials: 'include',
             });
       if (!res.ok) {
         const message = await res.text();
         throw new Error([res.statusText, message].join("\n"));
       }
+      // Get the token
+      const result = await res.json();
+      // Store the token and user
+      localStorage.setItem("jwt_token", result.token);
+      localStorage.setItem("user", JSON.stringify(result.user));;
+      // Reset form
       actions.resetForm();
       // Navigate to the /chats route using the Router object
       router.push("/chats");

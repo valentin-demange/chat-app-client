@@ -19,7 +19,7 @@ import useSWR from "swr";
 import { API_URL, GENERAL_CHAT_ID } from "config";
 
 export default function ChatHeader() {
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
   const chatId = useContext(ChatContext).currentChatId;
   const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
   const socket = useContext(SocketContext);
@@ -30,7 +30,11 @@ export default function ChatHeader() {
   // );
 
   const fetcher = (url: string): Promise<ChatInfo> => {
-    return fetch(url, { credentials: "include" }).then((response) =>
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    }).then((response) =>
       response.json()
     );
   };
@@ -63,8 +67,10 @@ export default function ChatHeader() {
           `${API_URL}/api/chats/${chatInfo.id.toString()}`,
           {
             method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+              "Content-Type": "application/json",
+            },
           }
         );
         if (!res.ok) {
@@ -72,7 +78,6 @@ export default function ChatHeader() {
           throw new Error([res.statusText, message].join("\n"));
         }
         const message = await res.text();
-        console.log(message);
         // Go back on general chat
         setCurrentChatId(Number(GENERAL_CHAT_ID));
         // Socket delete chat

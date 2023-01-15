@@ -19,12 +19,17 @@ const logout = async () => {
   try {
     const res = await fetch(`${API_URL}/api/users/logout`, {
       method: "GET",
-      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+        "Content-Type": "application/json",
+      },
     });
     if (!res.ok) {
       const message = await res.text();
       throw new Error([res.statusText, message].join("\n"));
     }
+    localStorage.removeItem("jwt_token");
+    localStorage.removeItem("user");
     router.push("/")
   } catch (error: any) {
     alert(error.message);
@@ -33,7 +38,7 @@ const logout = async () => {
 };
 
 export default function UserAvatar() {
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
 
     return (
       <Menu>

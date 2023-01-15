@@ -6,17 +6,19 @@ import { Message } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function ChatBody() {
-
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
   const [messages, setMessages] = useState([] as Message[]);
   const socket = useContext(SocketContext);
   const chatId = useContext(ChatContext).currentChatId;
 
-
   useEffect(() => {
     // Fetch the messages when the component mounts
     console.log(`Fetching messages of chat room n°${chatId}`);
-    fetch(`${API_URL}/api/chats/${chatId}/messages`, { credentials: "include" })
+    fetch(`${API_URL}/api/chats/${chatId}/messages`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    })
       .then((res) => res.json())
       .then(setMessages);
 
@@ -38,7 +40,6 @@ export default function ChatBody() {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
   }, [chatId]);
-
 
   if (messages) {
     const messagesList = messages.map((msg) =>

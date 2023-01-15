@@ -27,9 +27,11 @@ export default function ({ cb }: { cb: any }) {
     try {
       const res = await fetch(`${API_URL}/api/users/sign-up`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          "Content-Type": "application/json",
+        },
       });
 
       if (!res.ok) {

@@ -9,11 +9,15 @@ import { ChatInfo } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function SideBarChatItem({ chatId } : {chatId : number}) {
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
   const chatContext = useContext(ChatContext);
 
   const fetcher = (url: string): Promise<ChatInfo> => {
-    return fetch(url, { credentials: "include" }).then((response) =>
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    }).then((response) =>
       response.json()
     );
   };
@@ -32,17 +36,6 @@ export default function SideBarChatItem({ chatId } : {chatId : number}) {
   //   lastMessage: 0,
   //   chatId: 1,
   // }
-
-  const onClick = async () => {
-    // event.preventDefault();
-      const res = await fetch(`${API_URL}/api/users/test`, {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
-        // body: JSON.stringify(""),
-    })
-    console.log("Fetched!")
-  };
 
 
   if (chatInfo) {

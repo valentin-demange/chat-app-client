@@ -25,24 +25,25 @@ export default function ChatApp() {
     // });
     // const isLoading = false; const error = false;
 
-    const fetcher = (url: string): Promise<User> => {
-      return fetch(url, { credentials: "include" }).then((response) =>
-        response.json()
-      );
-    };
-  
-    const {
-      data: currentUser,
-      error,
-      isLoading,
-    } = useSWR(`${API_URL}/api/users/current`, fetcher);
-
   const [currentChatId, setCurrentChatId] = useState(Number(GENERAL_CHAT_ID));
 
-  if (currentUser)
+  const [loginData, setloginData] = useState({} as any);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const user = JSON.parse(localStorage.getItem("user") as string);
+    console.log(user)
+    setloginData({
+      token: token,
+      user: user,
+    });
+  }, []);
+  
+  if (loginData.user)
     return (
       <div className={styles.container}>
-        <UserContext.Provider value={currentUser}>
+        <UserContext.Provider value={loginData}>
           <ChatContext.Provider
             value={{ currentChatId: currentChatId, setCurrentChatId: setCurrentChatId }}
           >
@@ -55,6 +56,10 @@ export default function ChatApp() {
       </div>
     );
 
-  if (isLoading) return <div>Loading..</div>;
-  if (error) return <div><a href="/" color="blue">You must login to access this page</a></div>;
+return <div><a href="/" color="blue">You must login to access this page</a></div>
+  // if (isLoading) return <div>Loading..</div>;
+  // if (error) return <div><a href="/" color="blue">You must login to access this page</a></div>;
+
+
+
 }

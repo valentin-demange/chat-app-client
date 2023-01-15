@@ -8,7 +8,7 @@ import { User } from "utils/customTypes";
 import { API_URL } from "config";
 
 export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {userUid:number, handleCloseDrawer:any}) {
-  const currentUser = useContext(UserContext);
+  const currentUser = useContext(UserContext).user;
   const socket = useContext(SocketContext);
   const setCurrentChatId = useContext(ChatContext).setCurrentChatId;
 
@@ -20,8 +20,10 @@ export default function PrivateChatDrawerItem({ userUid, handleCloseDrawer } : {
       const memberUserIds = [currentUser.id, userUid];
       const res = await fetch(`${API_URL}/api/chats/new`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           memberUserIds: memberUserIds,
         }),

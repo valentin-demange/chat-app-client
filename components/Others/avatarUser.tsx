@@ -10,7 +10,11 @@ export default function AvatarUser({ userId } : {userId:number}) {
   // });
 
   const fetcher = (url: string): Promise<User> => {
-    return fetch(url, { credentials: "include" }).then((response) =>
+    return fetch(url, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+      },
+    }).then((response) =>
       response.json()
     );
   };

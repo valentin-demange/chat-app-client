@@ -7,8 +7,10 @@ export async function askGilbert(chatId: number, userName: string) {
       `${API_URL}/api/chats/${chatId}/messages`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          "Content-Type": "application/json",
+        },
       }
     );
     if (!res.ok) {
@@ -59,8 +61,10 @@ export async function checkGilbert(chatId: number): Promise<boolean> {
       `${API_URL}/api/chats/${chatId.toString()}`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt_token")}`,
+          "Content-Type": "application/json",
+        },
       }
     );
     if (!res.ok) {
