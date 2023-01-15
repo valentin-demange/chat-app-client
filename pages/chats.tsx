@@ -25,7 +25,7 @@ export default function ChatApp() {
     // });
     // const isLoading = false; const error = false;
 
-  const [currentChatId, setCurrentChatId] = useState(Number(GENERAL_CHAT_ID));
+  const [currentChatId, setCurrentChatId] = useState(GENERAL_CHAT_ID);
 
   const [loginData, setloginData] = useState({} as any);
 

@@ -79,7 +79,7 @@ export default function ChatHeader() {
         }
         const message = await res.text();
         // Go back on general chat
-        setCurrentChatId(Number(GENERAL_CHAT_ID));
+        setCurrentChatId(GENERAL_CHAT_ID);
         // Socket delete chat
         // WARNING : THIS MUST BE CORRECTED, IT SHOULD EMIT SOCKET FOR ALL MEMBER USERS IN THE CHAT
         socket.emit("delete chat", currentUser.id, chatInfo.id);

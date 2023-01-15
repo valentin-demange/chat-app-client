@@ -12,6 +12,7 @@ import {
 import { AddIcon } from "@chakra-ui/icons";
 import { LoginContext } from "utils/context";
 import PrivateChatDrawerItem from "./privateChatDrawerItem";
+import { ADMIN_USER_ID, GILBERT_USER_ID } from "utils/constants";
 
 export default function PrivateChatDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -28,7 +29,7 @@ export default function PrivateChatDrawer() {
     //   .filter((val) => val.uid !== currentUser.id)
     //   .map((val) => <PrivateChatDrawerItem key={val.uid} userUid={val.uid} handleCloseDrawer={onClose} />);
 
-    const uidToDisplay = [1];
+    const uidToDisplay = [GILBERT_USER_ID, ADMIN_USER_ID];
     const listItems = uidToDisplay
       .filter((userId) => userId !== currentUser.id)
       .map((userId) => <PrivateChatDrawerItem key={userId} userUid={userId} handleCloseDrawer={onClose} />);

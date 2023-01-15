@@ -30,7 +30,7 @@ export default function ChatFooter() {
     if (isGilbert) {
       await delay(1000);
       const answerGilbert = await askGilbert(chatId, currentUser.firstName)
-      await writeMessage(chatId, Number(GILBERT_USER_ID), answerGilbert)
+      await writeMessage(chatId, GILBERT_USER_ID, answerGilbert)
     }
   };
 

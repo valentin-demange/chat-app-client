@@ -46,7 +46,7 @@ const formatGilbertPrompt = (messagesList: any, userName: string) => {
 
   const body = messagesList
     .map((msg: Message) => {
-      if (msg.userId === Number(GILBERT_USER_ID)) return `Gilbert:` + msg.message;
+      if (msg.userId === GILBERT_USER_ID) return `Gilbert:` + msg.message;
       else return `${userName}: ` + msg.message;
     })
     .join("\n");
@@ -74,7 +74,7 @@ export async function checkGilbert(chatId: number): Promise<boolean> {
     const chatInfo = await res.json();
     if (
       chatInfo.type == "private" &&
-      chatInfo.membersUid.includes(Number(GILBERT_USER_ID))
+      chatInfo.membersUid.includes(GILBERT_USER_ID)
     )
       return true;
   } catch (error: any) {
