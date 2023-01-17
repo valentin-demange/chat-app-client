@@ -16,7 +16,6 @@
 
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
-- [Firebase](https://firebase.google.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Chakra-UI](https://chakra-ui.com/)
 - [OpenAi API](https://beta.openai.com/)
