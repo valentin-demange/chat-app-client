@@ -55,7 +55,17 @@ export default function ({ cb }: { cb: any }) {
     >
       {(props) => (
         <Form>
-          <div className={styles.formButtonContainer}>
+          <FormikInput
+            fieldName={"username"}
+            placeholder={"Email"}
+            validateInput={validateInput}
+          />
+          <FormikPasswordInput
+            fieldName={"password"}
+            validateInput={validateInput}
+          />
+
+                    <div className={styles.formButtonContainer}>
             <Spacer />
 
             <Button
@@ -73,20 +83,12 @@ export default function ({ cb }: { cb: any }) {
               type="submit"
               isLoading={props.isSubmitting}
             >
-              Log in
+              OK
             </Button>
             <Spacer />
           </div>
 
-          <FormikInput
-            fieldName={"username"}
-            placeholder={"Email"}
-            validateInput={validateInput}
-          />
-          <FormikPasswordInput
-            fieldName={"password"}
-            validateInput={validateInput}
-          />
+
         </Form>
       )}
     </Formik>
