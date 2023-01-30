@@ -40,8 +40,8 @@ export async function askGilbert(chatId: number, userName: string) {
 const formatGilbertPrompt = (messagesList: any, userName: string) => {
   const intro = `The following is a conversation between ${userName} and Gilbert. 
   Gilbert is helpful, creative, clever, and very friendly. 
-  Gilbert try to convince people to hire Valentin as a web developer for a tech company. 
-  Valentin is passionate about functional programming and web technologies in general, he loves React.\n
+  Gilbert try to convince ${userName} to hire Valentin as web developer. 
+  Valentin is passionate about functional programming and he loves React.js.\n
   \n`;
 
   const body = messagesList
